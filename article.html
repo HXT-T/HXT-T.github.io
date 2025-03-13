@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章列表 - 我的个人博客</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">我的博客</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="articles.html" class="active">文章</a></li>
+                    <li><a href="about.html">关于我</a></li>
+                    <li><a href="contact.html">联系方式</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h2>所有文章</h2>
+            <p>探索我的所有博客文章</p>
+        </div>
+    </section>
+
+    <main class="container articles-page">
+        <div class="articles-container">
+            <div class="articles-filters">
+                <div class="search-box">
+                    <input type="text" placeholder="搜索文章...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>分类</h3>
+                    <ul class="filter-list">
+                        <li><a href="#" class="active">全部</a></li>
+                        <li><a href="#">技术分享 <span>(12)</span></a></li>
+                        <li><a href="#">学习笔记 <span>(8)</span></a></li>
+                        <li><a href="#">项目经验 <span>(5)</span></a></li>
+                        <li><a href="#">生活随笔 <span>(7)</span></a></li>
+                        <li><a href="#">读书心得 <span>(4)</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>标签</h3>
+                    <div class="tags">
+                        <a href="#" class="tag">JavaScript</a>
+                        <a href="#" class="tag">HTML5</a>
+                        <a href="#" class="tag">CSS3</a>
+                        <a href="#" class="tag">Python</a>
+                        <a href="#" class="tag">React</a>
+                        <a href="#" class="tag">Node.js</a>
+                        <a href="#" class="tag">数据库</a>
+                        <a href="#" class="tag">算法</a>
+                        <a href="#" class="tag">开源</a>
+                        <a href="#" class="tag">学习方法</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="articles-list">
+                <article class="article-item">
+                    <div class="article-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar-alt"></i> 2023年12月15日</span>
+                            <span class="article-category"><i class="far fa-folder"></i> 技术分享</span>
+                        </div>
+                        <h3 class="article-title"><a href="article1.html">如何提高编程效率</a></h3>
+                        <p class="article-excerpt">在这篇文章中，我将分享一些提高日常编程效率的小技巧和工具推荐。从编辑器的选择到快捷键的使用，从代码片段到自动化工具，这些方法将帮助你节省时间，提高工作效率。</p>
+                        <div class="article-tags">
+                            <a href="#" class="tag">编程技巧</a>
+                            <a href="#" class="tag">工具</a>
+                            <a href="#" class="tag">效率</a>
+                        </div>
+                        <a href="article1.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+
+                <article class="article-item">
+                    <div class="article-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar-alt"></i> 2023年12月10日</span>
+                            <span class="article-category"><i class="far fa-folder"></i> 读书心得</span>
+                        </div>
+                        <h3 class="article-title"><a href="article2.html">我最喜欢的5本技术书籍</a></h3>
+                        <p class="article-excerpt">这些书籍对我的技术成长产生了深远的影响，推荐给所有想要提升自己的开发者。从编程语言到系统设计，从算法到软件工程，这些书籍涵盖了软件开发的各个方面。</p>
+                        <div class="article-tags">
+                            <a href="#" class="tag">读书</a>
+                            <a href="#" class="tag">技术书籍</a>
+                            <a href="#" class="tag">学习</a>
+                        </div>
+                        <a href="article2.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+
+                <article class="article-item">
+                    <div class="article-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar-alt"></i> 2023年12月5日</span>
+                            <span class="article-category"><i class="far fa-folder"></i> 生活随笔</span>
+                        </div>
+                        <h3 class="article-title"><a href="article3.html">旅行中的编程灵感</a></h3>
+                        <p class="article-excerpt">上个月的旅行中，我获得了一些意想不到的编程灵感和项目创意。有时候，离开熟悉的环境，接触新的文化和风景，能够激发我们的创造力和解决问题的新思路。</p>
+                        <div class="article-tags">
+                            <a href="#" class="tag">旅行</a>
+                            <a href="#" class="tag">灵感</a>
+                            <a href="#" class="tag">创意</a>
+                        </div>
+                        <a href="article3.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+
+                <article class="article-item">
+                    <div class="article-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar-alt"></i> 2023年12月1日</span>
+                            <span class="article-category"><i class="far fa-folder"></i> 技术分享</span>
+                        </div>
+                        <h3 class="article-title"><a href="article4.html">前端开发中的性能优化策略</a></h3>
+                        <p class="article-excerpt">探讨现代前端应用中常见的性能瓶颈以及如何解决这些问题。从资源加载到渲染优化，从代码分割到缓存策略，这些技术可以显著提升你的网站性能。</p>
+                        <div class="article-tags">
+                            <a href="#" class="tag">前端</a>
+                            <a href="#" class="tag">性能优化</a>
+                            <a href="#" class="tag">Web开发</a>
+                        </div>
+                        <a href="article4.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+
+                <article class="article-item">
+                    <div class="article-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar-alt"></i> 2023年11月25日</span>
+                            <span class="article-category"><i class="far fa-folder"></i> 技术分享</span>
+                        </div>
+                        <h3 class="article-title"><a href="article5.html">人工智能在日常生活中的应用</a></h3>
+                        <p class="article-excerpt">AI技术已经悄然改变了我们的生活方式，本文将探讨一些常见的应用场景。从智能助手到推荐系统，从图像识别到自然语言处理，AI正在各个领域发挥着越来越重要的作用。</p>
+                        <div class="article-tags">
+                            <a href="#" class="tag">人工智能</a>
+                            <a href="#" class="tag">AI应用</a>
+                            <a href="#" class="tag">技术趋势</a>
+                        </div>
+                        <a href="article5.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+
+                <article class="article-item">
+                    <div class="article-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-date"><i class="far fa-calendar-alt"></i> 2023年11月20日</span>
+                            <span class="article-category"><i class="far fa-folder"></i> 生活随笔</span>
+                        </div>
+                        <h3 class="article-title"><a href="article6.html">如何保持工作与生活的平衡</a></h3>
+                        <p class="article-excerpt">在忙碌的工作中如何找到平衡点，保持身心健康和工作效率。这篇文章分享了一些实用的方法和个人经验，帮助你在追求职业成功的同时，也能享受丰富的生活。</p>
+                        <div class="article-tags">
+                            <a href="#" class="tag">工作生活平衡</a>
+                            <a href="#" class="tag">时间管理</a>
+                            <a href="#" class="tag">健康</a>
+                        </div>
+                        <a href="article6.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="pagination">
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <a href="#" class="page-link next">下一页 <i class="fas fa-angle-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>我的博客</h2>
+                    <p>分享技术与生活</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="articles.html">文章</a></li>
+                        <li><a href="about.html">关于我</a></li>
+                        <li><a href="contact.html">联系方式</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>关注我</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 我的个人博客. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
