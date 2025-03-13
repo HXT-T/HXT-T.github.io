@@ -1,18 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>祝你开心</title>
- <style type="text/css">
-     h3{text-align: center;color: #3300ff;}
-     hr{color: #660066;}
-     #p2{font-size: 1000%;font-style: italic;font-family: 楷书，隶书；}
- </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人博客</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-<hr>
-<h3 id="p2"></h3>
+    <header>
+        <div class="container">
+            <h1 class="logo">我的博客</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">首页</a></li>
+                    <li><a href="articles.html">文章</a></li>
+                    <li><a href="about.html">关于我</a></li>
+                    <li><a href="contact.html">联系方式</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>欢迎来到我的博客</h2>
+            <p>分享我的想法、经验和知识</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="featured-posts">
+            <h2 class="section-title">精选文章</h2>
+            <div class="posts-grid">
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-date">2023年12月15日</span>
+                        <h3 class="post-title"><a href="article1.html">如何提高编程效率</a></h3>
+                        <p class="post-excerpt">在这篇文章中，我将分享一些提高日常编程效率的小技巧和工具推荐...</p>
+                        <a href="article1.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-date">2023年12月10日</span>
+                        <h3 class="post-title"><a href="article2.html">我最喜欢的5本技术书籍</a></h3>
+                        <p class="post-excerpt">这些书籍对我的技术成长产生了深远的影响，推荐给所有想要提升自己的开发者...</p>
+                        <a href="article2.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                    </div>
+                    <div class="post-content">
+                        <span class="post-date">2023年12月5日</span>
+                        <h3 class="post-title"><a href="article3.html">旅行中的编程灵感</a></h3>
+                        <p class="post-excerpt">上个月的旅行中，我获得了一些意想不到的编程灵感和项目创意...</p>
+                        <a href="article3.html" class="read-more">阅读更多</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="recent-posts">
+            <h2 class="section-title">最新文章</h2>
+            <div class="posts-list">
+                <article class="post-item">
+                    <span class="post-date">2023年12月1日</span>
+                    <h3 class="post-title"><a href="article4.html">前端开发中的性能优化策略</a></h3>
+                    <p class="post-excerpt">探讨现代前端应用中常见的性能瓶颈以及如何解决这些问题...</p>
+                </article>
+
+                <article class="post-item">
+                    <span class="post-date">2023年11月25日</span>
+                    <h3 class="post-title"><a href="article5.html">人工智能在日常生活中的应用</a></h3>
+                    <p class="post-excerpt">AI技术已经悄然改变了我们的生活方式，本文将探讨一些常见的应用场景...</p>
+                </article>
+
+                <article class="post-item">
+                    <span class="post-date">2023年11月20日</span>
+                    <h3 class="post-title"><a href="article6.html">如何保持工作与生活的平衡</a></h3>
+                    <p class="post-excerpt">在忙碌的工作中如何找到平衡点，保持身心健康和工作效率...</p>
+                </article>
+
+                <article class="post-item">
+                    <span class="post-date">2023年11月15日</span>
+                    <h3 class="post-title"><a href="article7.html">开源项目贡献指南</a></h3>
+                    <p class="post-excerpt">想要为开源社区做贡献？这篇文章将指导你如何开始你的开源之旅...</p>
+                </article>
+            </div>
+            <a href="articles.html" class="view-all">查看所有文章</a>
+        </section>
+    </main>
+
+    <aside class="sidebar">
+        <div class="container">
+            <div class="widget about-widget">
+                <h3 class="widget-title">关于我</h3>
+                <div class="widget-content">
+                    <img src="https://via.placeholder.com/150" alt="个人头像" class="avatar">
+                    <p>你好！我是一名热爱技术和分享的开发者。这个博客记录了我的学习心得和生活感悟。</p>
+                    <a href="about.html" class="btn">了解更多</a>
+                </div>
+            </div>
+
+            <div class="widget categories-widget">
+                <h3 class="widget-title">文章分类</h3>
+                <div class="widget-content">
+                    <ul>
+                        <li><a href="#">技术分享 <span>(12)</span></a></li>
+                        <li><a href="#">学习笔记 <span>(8)</span></a></li>
+                        <li><a href="#">项目经验 <span>(5)</span></a></li>
+                        <li><a href="#">生活随笔 <span>(7)</span></a></li>
+                        <li><a href="#">读书心得 <span>(4)</span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="widget tags-widget">
+                <h3 class="widget-title">标签云</h3>
+                <div class="widget-content">
+                    <div class="tags">
+                        <a href="#" class="tag">JavaScript</a>
+                        <a href="#" class="tag">HTML5</a>
+                        <a href="#" class="tag">CSS3</a>
+                        <a href="#" class="tag">Python</a>
+                        <a href="#" class="tag">React</a>
+                        <a href="#" class="tag">Node.js</a>
+                        <a href="#" class="tag">数据库</a>
+                        <a href="#" class="tag">算法</a>
+                        <a href="#" class="tag">开源</a>
+                        <a href="#" class="tag">学习方法</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>我的博客</h2>
+                    <p>分享技术与生活</p>
+                </div>
+                <div class="footer-links">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="articles.html">文章</a></li>
+                        <li><a href="about.html">关于我</a></li>
+                        <li><a href="contact.html">联系方式</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>关注我</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 我的个人博客. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
-
-
