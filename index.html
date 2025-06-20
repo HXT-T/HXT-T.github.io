@@ -6,107 +6,86 @@
     <title>我的个人博客</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- 可选：Google Fonts 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1 class="logo">我的博客</h1>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a class="logo" href="index.html">
+                <img src="https://www.emojiall.com/en/header-svg/%F0%9F%8D%83.svg" alt="logo" class="logo-img">
+                <span class="logo-title">我的博客</span>
+            </a>
             <nav>
-                <ul>
-                    <li><a href="index.html" class="active">首页</a></li>
-                    <li><a href="articles.html">文章</a></li>
-                    <li><a href="about.html">关于我</a></li>
-                    <li><a href="contact.html">联系方式</a></li>
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active"><i class="fa-solid fa-home"></i> 首页</a></li>
+                    <li><a href="articles.html"><i class="fa-solid fa-file-alt"></i> 文章</a></li>
+                    <li><a href="#"><i class="fa-solid fa-tags"></i> 标签</a></li>
+                    <li><a href="#"><i class="fa-solid fa-timeline"></i> 时间线</a></li>
+                    <li><a href="#"><i class="fa-solid fa-folder-tree"></i> 系列</a></li>
+                    <li><a href="#"><i class="fa-solid fa-quote-left"></i> 动态</a></li>
+                    <li><a href="#"><i class="fa-solid fa-link"></i> 相遇</a></li>
+                    <li><a href="#"><i class="fa-solid fa-sack-dollar"></i> 赞助</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="has-dropdown"><i class="fa-solid fa-address-book"></i> 关于我 <i class="fa-solid fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">✨ 简介</a></li>
+                            <li><a href="#">💎 记忆</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h2>欢迎来到我的博客</h2>
-            <p>分享我的想法、经验和知识</p>
+    <!-- Banner/欢迎区 -->
+    <section class="banner">
+        <img class="banner-bg" src="https://ybkjzj.com:5555/d/LeavesResource/webImage/192110-1568028070e1cc.jpg" alt="banner-bg">
+        <div class="banner-content">
+            <h1 class="banner-title">我的博客</h1>
+            <p class="banner-subtitle">“贵宾远至，不甚荣幸”</p>
+            <div class="banner-social">
+                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-bilibili"></i></a>
+                <a href="#" target="_blank"><i class="fa-solid fa-music"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-steam"></i></a>
+                <span class="social-qr">
+                    <i class="fab fa-weixin"></i>
+                    <img class="qr-img" src="https://ybkjzj.com:5555/d/LeavesResource/webImage/wechatqrs.jpg" alt="微信二维码">
+                </span>
+            </div>
         </div>
     </section>
 
-    <main class="container">
-        <section class="featured-posts">
-            <h2 class="section-title">精选文章</h2>
-            <div class="posts-grid">
-                <article class="post-card">
-                    <div class="post-image">
-                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
-                    </div>
-                    <div class="post-content">
-                        <span class="post-date">2023年12月15日</span>
-                        <h3 class="post-title"><a href="article1.html">如何提高编程效率</a></h3>
-                        <p class="post-excerpt">在这篇文章中，我将分享一些提高日常编程效率的小技巧和工具推荐...</p>
-                        <a href="article1.html" class="read-more">阅读更多</a>
-                    </div>
-                </article>
+    <div class="main-wrapper container">
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <section class="posts-list">
+                <h2 class="section-title">最新文章</h2>
+                <div class="posts-grid">
+                    <!-- 示例文章卡片，可后续用 JS/模板动态生成 -->
+                    <article class="post-card">
+                        <div class="post-image">
+                            <img src="https://via.placeholder.com/600x400" alt="文章图片">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-date">2023年12月15日</span>
+                            <h3 class="post-title"><a href="#">如何提高编程效率</a></h3>
+                            <p class="post-excerpt">在这篇文章中，我将分享一些提高日常编程效率的小技巧和工具推荐...</p>
+                            <a href="#" class="read-more">阅读更多</a>
+                        </div>
+                    </article>
+                    <!-- ...更多文章卡片... -->
+                </div>
+                <a href="articles.html" class="view-all">查看所有文章</a>
+            </section>
+        </main>
 
-                <article class="post-card">
-                    <div class="post-image">
-                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
-                    </div>
-                    <div class="post-content">
-                        <span class="post-date">2023年12月10日</span>
-                        <h3 class="post-title"><a href="article2.html">我最喜欢的5本技术书籍</a></h3>
-                        <p class="post-excerpt">这些书籍对我的技术成长产生了深远的影响，推荐给所有想要提升自己的开发者...</p>
-                        <a href="article2.html" class="read-more">阅读更多</a>
-                    </div>
-                </article>
-
-                <article class="post-card">
-                    <div class="post-image">
-                        <img src="https://via.placeholder.com/600x400" alt="文章图片">
-                    </div>
-                    <div class="post-content">
-                        <span class="post-date">2023年12月5日</span>
-                        <h3 class="post-title"><a href="article3.html">旅行中的编程灵感</a></h3>
-                        <p class="post-excerpt">上个月的旅行中，我获得了一些意想不到的编程灵感和项目创意...</p>
-                        <a href="article3.html" class="read-more">阅读更多</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="recent-posts">
-            <h2 class="section-title">最新文章</h2>
-            <div class="posts-list">
-                <article class="post-item">
-                    <span class="post-date">2023年12月1日</span>
-                    <h3 class="post-title"><a href="article4.html">前端开发中的性能优化策略</a></h3>
-                    <p class="post-excerpt">探讨现代前端应用中常见的性能瓶颈以及如何解决这些问题...</p>
-                </article>
-
-                <article class="post-item">
-                    <span class="post-date">2023年11月25日</span>
-                    <h3 class="post-title"><a href="article5.html">人工智能在日常生活中的应用</a></h3>
-                    <p class="post-excerpt">AI技术已经悄然改变了我们的生活方式，本文将探讨一些常见的应用场景...</p>
-                </article>
-
-                <article class="post-item">
-                    <span class="post-date">2023年11月20日</span>
-                    <h3 class="post-title"><a href="article6.html">如何保持工作与生活的平衡</a></h3>
-                    <p class="post-excerpt">在忙碌的工作中如何找到平衡点，保持身心健康和工作效率...</p>
-                </article>
-
-                <article class="post-item">
-                    <span class="post-date">2023年11月15日</span>
-                    <h3 class="post-title"><a href="article7.html">开源项目贡献指南</a></h3>
-                    <p class="post-excerpt">想要为开源社区做贡献？这篇文章将指导你如何开始你的开源之旅...</p>
-                </article>
-            </div>
-            <a href="articles.html" class="view-all">查看所有文章</a>
-        </section>
-    </main>
-
-    <aside class="sidebar">
-        <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
             <div class="widget about-widget">
                 <h3 class="widget-title">关于我</h3>
                 <div class="widget-content">
@@ -115,20 +94,32 @@
                     <a href="about.html" class="btn">了解更多</a>
                 </div>
             </div>
-
-            <div class="widget categories-widget">
-                <h3 class="widget-title">文章分类</h3>
+            <div class="widget stats-widget">
+                <h3 class="widget-title">博客统计</h3>
                 <div class="widget-content">
                     <ul>
-                        <li><a href="#">技术分享 <span>(12)</span></a></li>
-                        <li><a href="#">学习笔记 <span>(8)</span></a></li>
-                        <li><a href="#">项目经验 <span>(5)</span></a></li>
-                        <li><a href="#">生活随笔 <span>(7)</span></a></li>
-                        <li><a href="#">读书心得 <span>(4)</span></a></li>
+                        <li>文章数：<span>20</span></li>
+                        <li>标签数：<span>10</span></li>
+                        <li>分类数：<span>5</span></li>
                     </ul>
                 </div>
             </div>
-
+            <div class="widget announcement-widget">
+                <h3 class="widget-title">公告</h3>
+                <div class="widget-content">
+                    <p>用更多的了解跨越隔阂与偏见</p>
+                </div>
+            </div>
+            <div class="widget links-widget">
+                <h3 class="widget-title">快捷链接</h3>
+                <div class="widget-content">
+                    <ul>
+                        <li><a href="#">进一步了解我？</a></li>
+                        <li><a href="#">最近更新了什么？</a></li>
+                        <li><a href="#">我的书签</a></li>
+                    </ul>
+                </div>
+            </div>
             <div class="widget tags-widget">
                 <h3 class="widget-title">标签云</h3>
                 <div class="widget-content">
@@ -146,9 +137,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </aside>
+        </aside>
+    </div>
 
+    <!-- 页脚 -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -176,11 +168,25 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 我的个人博客. 保留所有权利.</p>
+                <p>&copy; 2023 我的个人博客. 保留所有权利. | <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备2024143438号-1</a> | 已运行 <span id="runtime"></span></p>
             </div>
         </div>
     </footer>
 
+    <!-- 返回顶部、夜间模式等小工具挂载点 -->
+    <div id="tools">
+        <!-- 这里可后续插入返回顶部、夜间模式等按钮 -->
+    </div>
+
     <script src="js/main.js"></script>
+    <script>
+    // 运行天数示例脚本
+    window.onload = function() {
+        var start = new Date('2023-01-01');
+        var now = new Date();
+        var days = Math.floor((now - start) / (1000*60*60*24));
+        document.getElementById('runtime').innerText = days + ' 天';
+    };
+    </script>
 </body>
 </html>
