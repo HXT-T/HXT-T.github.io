@@ -13,25 +13,27 @@
     <!-- 顶部导航栏 -->
     <header class="navbar">
         <div class="container navbar-content">
-            <a class="logo" href="index.html">
-                <img src="https://www.emojiall.com/en/header-svg/%F0%9F%8D%83.svg" alt="logo" class="logo-img">
-                <span class="logo-title">我的博客</span>
+            <!-- LOGO和博客名 -->
+            <a class="logo" href="#">
+                <!-- <img src="..." alt="logo" class="logo-img"> -->
+                <span class="logo-title">博客名</span>
             </a>
             <nav>
                 <ul class="nav-list">
-                    <li><a href="index.html" class="active"><i class="fa-solid fa-home"></i> 首页</a></li>
-                    <li><a href="articles.html"><i class="fa-solid fa-file-alt"></i> 文章</a></li>
-                    <li><a href="#"><i class="fa-solid fa-tags"></i> 标签</a></li>
-                    <li><a href="#"><i class="fa-solid fa-timeline"></i> 时间线</a></li>
-                    <li><a href="#"><i class="fa-solid fa-folder-tree"></i> 系列</a></li>
-                    <li><a href="#"><i class="fa-solid fa-quote-left"></i> 动态</a></li>
-                    <li><a href="#"><i class="fa-solid fa-link"></i> 相遇</a></li>
-                    <li><a href="#"><i class="fa-solid fa-sack-dollar"></i> 赞助</a></li>
+                    <!-- 菜单项示例 -->
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">文章</a></li>
+                    <li><a href="#">标签</a></li>
+                    <li><a href="#">时间线</a></li>
+                    <li><a href="#">系列</a></li>
+                    <li><a href="#">动态</a></li>
+                    <li><a href="#">相遇</a></li>
+                    <li><a href="#">赞助</a></li>
                     <li class="dropdown">
-                        <a href="#" class="has-dropdown"><i class="fa-solid fa-address-book"></i> 关于我 <i class="fa-solid fa-chevron-down"></i></a>
+                        <a href="#" class="has-dropdown">关于我</a>
                         <ul class="dropdown-menu">
-                            <li><a href="about.html">✨ 简介</a></li>
-                            <li><a href="#">💎 记忆</a></li>
+                            <li><a href="#">简介</a></li>
+                            <li><a href="#">记忆</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -42,16 +44,14 @@
 
     <!-- Banner/欢迎区 -->
     <section class="banner">
-        <img class="banner-bg" src="https://ybkjzj.com:5555/d/LeavesResource/webImage/192110-1568028070e1cc.jpg" alt="banner-bg">
+        <!-- <img class="banner-bg" src="..." alt="banner-bg"> -->
         <div class="banner-content">
-            <h1 class="banner-title">我的博客</h1>
-            <p class="banner-subtitle">“贵宾远至，不甚荣幸”</p>
+            <h1 class="banner-title">博客名</h1>
+            <p class="banner-subtitle">副标题</p>
             <div class="banner-social">
-                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank"><i class="fa-solid fa-envelope"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-bilibili"></i></a>
-                <a href="#" target="_blank"><i class="fa-solid fa-music"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-steam"></i></a>
+                <!-- 社交链接示例 -->
+                <!-- <a href="#"><i class="fab fa-github"></i></a> -->
+                <!-- ... -->
             </div>
         </div>
     </section>
@@ -62,75 +62,47 @@
             <section class="posts-list">
                 <h2 class="section-title">最新文章</h2>
                 <div class="posts-grid">
-                    <!-- 示例文章卡片，可后续用 JS/模板动态生成 -->
-                    <article class="post-card">
-                        <div class="post-image">
-                            <img src="https://via.placeholder.com/600x400" alt="文章图片">
-                        </div>
-                        <div class="post-content">
-                            <span class="post-date">2023年12月15日</span>
-                            <h3 class="post-title"><a href="#">如何提高编程效率</a></h3>
-                            <p class="post-excerpt">在这篇文章中，我将分享一些提高日常编程效率的小技巧和工具推荐...</p>
-                            <a href="#" class="read-more">阅读更多</a>
-                        </div>
-                    </article>
-                    <!-- ...更多文章卡片... -->
+                    <!-- 文章卡片结构（留空，后续自定义填充） -->
                 </div>
-                <a href="articles.html" class="view-all">查看所有文章</a>
+                <!-- <a href="#" class="view-all">查看所有文章</a> -->
             </section>
         </main>
 
         <!-- 侧边栏 -->
         <aside class="sidebar">
+            <!-- 关于我小部件 -->
             <div class="widget about-widget">
                 <h3 class="widget-title">关于我</h3>
                 <div class="widget-content">
-                    <img src="https://via.placeholder.com/150" alt="个人头像" class="avatar">
-                    <p>你好！我是一名热爱技术和分享的开发者。这个博客记录了我的学习心得和生活感悟。</p>
-                    <a href="about.html" class="btn">了解更多</a>
+                    <!-- 头像、简介等自定义内容 -->
                 </div>
             </div>
+            <!-- 统计小部件 -->
             <div class="widget stats-widget">
                 <h3 class="widget-title">博客统计</h3>
                 <div class="widget-content">
-                    <ul>
-                        <li>文章数：<span>20</span></li>
-                        <li>标签数：<span>10</span></li>
-                        <li>分类数：<span>5</span></li>
-                    </ul>
+                    <!-- 统计内容自定义 -->
                 </div>
             </div>
+            <!-- 公告小部件 -->
             <div class="widget announcement-widget">
                 <h3 class="widget-title">公告</h3>
                 <div class="widget-content">
-                    <p>用更多的了解跨越隔阂与偏见</p>
+                    <!-- 公告内容自定义 -->
                 </div>
             </div>
+            <!-- 快捷链接小部件 -->
             <div class="widget links-widget">
                 <h3 class="widget-title">快捷链接</h3>
                 <div class="widget-content">
-                    <ul>
-                        <li><a href="#">进一步了解我？</a></li>
-                        <li><a href="#">最近更新了什么？</a></li>
-                        <li><a href="#">我的书签</a></li>
-                    </ul>
+                    <!-- 快捷链接自定义 -->
                 </div>
             </div>
+            <!-- 标签云小部件 -->
             <div class="widget tags-widget">
                 <h3 class="widget-title">标签云</h3>
                 <div class="widget-content">
-                    <div class="tags">
-                        <a href="#" class="tag">JavaScript</a>
-                        <a href="#" class="tag">HTML5</a>
-                        <a href="#" class="tag">CSS3</a>
-                        <a href="#" class="tag">Python</a>
-                        <a href="#" class="tag">React</a>
-                        <a href="#" class="tag">Node.js</a>
-                        <a href="#" class="tag">数据库</a>
-                        <a href="#" class="tag">算法</a>
-                        <a href="#" class="tag">开源</a>
-                        <a href="#" class="tag">学习方法</a>
-                    </div>
+                    <!-- 标签云自定义 -->
                 </div>
             </div>
         </aside>
@@ -141,42 +113,36 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h2>我的博客</h2>
-                    <p>分享技术与生活</p>
+                    <h2>博客名</h2>
+                    <p>博客描述</p>
                 </div>
                 <div class="footer-links">
                     <h3>快速链接</h3>
                     <ul>
-                        <li><a href="index.html">首页</a></li>
-                        <li><a href="articles.html">文章</a></li>
-                        <li><a href="about.html">关于我</a></li>
-                        <li><a href="contact.html">联系方式</a></li>
+                        <!-- 页脚链接自定义 -->
                     </ul>
                 </div>
                 <div class="footer-social">
                     <h3>关注我</h3>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <!-- 社交图标自定义 -->
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 我的个人博客. 保留所有权利. | <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备2024143438号-1</a> | 已运行 <span id="runtime"></span></p>
+                <p>&copy; 2023 博客名. 保留所有权利. | <a href="#" target="_blank">备案号</a> | 已运行 <span id="runtime"></span></p>
             </div>
         </div>
     </footer>
 
-    <!-- 返回顶部、夜间模式等小工具挂载点 -->
+    <!-- 小工具挂载点 -->
     <div id="tools">
-        <!-- 这里可后续插入返回顶部、夜间模式等按钮 -->
+        <!-- 返回顶部、夜间模式等按钮挂载区 -->
     </div>
 
     <script src="js/main.js"></script>
     <script>
-    // 运行天数示例脚本
+    // 运行天数示例脚本（可选）
     window.onload = function() {
         var start = new Date('2023-01-01');
         var now = new Date();
