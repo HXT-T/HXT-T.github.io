@@ -1,61 +1,112 @@
-# Jekyll Configuration
-# 使用 Chirpy 主题
+# Jekyll Configuration for Chirpy Theme
 # 文档: https://chirpy.cotes.page/
 
-theme: jekyll-theme-chirpy
-
-# 站点信息
-title: "HXT Blog"
-tagline: "记录思考与成长"
-description: >-
+# ==========================
+# 基础设置
+# ==========================
+baseurl: ""               # 子路径，为空表示根目录
+title: "HXT Blog"         # 网站标题
+tagline: "记录思考与成长"   # 副标题
+description: >-           # SEO 描述
   一个简洁的个人博客，分享技术、生活与无限进步。
 
-# 语言设置
-lang: zh-CN
-timezone: Asia/Shanghai
+lang: zh-CN              # 语言
+timezone: Asia/Shanghai  # 时区
 
-# 作者信息
+url: "https://hxt-t.github.io"  # 网站地址
+
+# ==========================
+# 作者信息 & 侧边栏
+# ==========================
 author:
   name: "HXT"
   email: "your-email@example.com"
-  links:
-    - https://github.com/hxt-t
 
-# GitHub 设置
-github:
-  username: hxt-t
+# 头像（放在 assets/img/ 下，或直接用 GitHub 头像）
+avatar: "/assets/img/avatar.png"
 
-# 社交链接
+# 侧边栏简介（仿 oksanye.com 风格）
+bio: "用更多的了解跨越隔阂与偏见"
+
+# ==========================
+# 社交媒体（侧边栏图标）
+# 在 _data/contact.yml 中定义具体平台
+# ==========================
 social:
   name: HXT
   links:
     - https://github.com/hxt-t
 
-# 网站 URL
-url: "https://hxt-t.github.io"
+# ==========================
+# GitHub 设置
+# ==========================
+github:
+  username: hxt-t
 
-# 分页
-paginate: 8
+twitter:
+  username:               # 如有 Twitter 可填写
 
-# 主题模式 (light | dark | 留空跟随系统)
+# ==========================
+# 主题外观
+# ==========================
+# 主题模式: light | dark | 留空(跟随系统)
 theme_mode:
 
-# 版权
-copyright: "© 2024 HXT."
+# 代码高亮主题
+code_highlight: github
 
+# 分页设置
+paginate: 8               # 每页文章数
+
+# 目录显示
+toc: true
+
+# ==========================
+# 评论系统（Giscus，免费）
+# ==========================
+comments:
+  active: giscus
+  giscus:
+    repo: hxt-t/hxt-t.github.io
+    repo_id: ""           # 访问 https://giscus.app/ 获取
+    category: Announcements
+    category_id: ""       # 访问 https://giscus.app/ 获取
+    mapping: pathname
+    input_position: bottom
+    lang: zh-CN
+    reactions_enabled: 1
+    emit_metadata: 0
+
+# ==========================
+# 分析统计（可选）
+# ==========================
+analytics:
+  google:
+    id:                   # Google Analytics ID
+
+# ==========================
+# 页脚
+# ==========================
+copyright: "© 2024 - 2026 HXT. 保留所有权利。"
+
+# 显示 "Powered by Jekyll & Chirpy"（可关闭）
+theme_attribution: true
+
+# ==========================
 # 打赏/赞助（可选）
+# ==========================
 sponsor:
   enable: false
 
-# 访问统计
-analytics:
-  google:
-    id: # 可选，填写 Google Analytics ID
+# ==========================
+# 搜索
+# ==========================
+google_site_verification:
+bing_site_verification:
 
-# 目录
-toc: true
-
+# ==========================
 # 插件
+# ==========================
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
@@ -63,7 +114,9 @@ plugins:
   - jekyll-seo-tag
   - jekyll-archives
 
+# ==========================
 # 忽略文件
+# ==========================
 exclude:
   - .sass-cache/
   - .jekyll-cache/
@@ -72,3 +125,5 @@ exclude:
   - Gemfile.lock
   - node_modules/
   - vendor/
+  - tools/
+  - README.md

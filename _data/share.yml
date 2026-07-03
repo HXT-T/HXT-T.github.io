@@ -1,0 +1,10 @@
+# 文章底部分享按钮
+
+- type: twitter
+  icon: "fab fa-x-twitter"
+
+- type: facebook
+  icon: "fab fa-facebook-square"
+
+- type: telegram
+  icon: "fab fa-telegram"
