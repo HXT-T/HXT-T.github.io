@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://hxt-t.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hxt-t.github.io/" rel="alternate" type="text/html" hreflang="zh-CN" /><updated>2026-07-03T22:43:48+08:00</updated><id>https://hxt-t.github.io/feed.xml</id><title type="html">HXT Blog</title><subtitle>一个简洁的个人博客，分享技术、生活与无限进步。</subtitle><author><name>HXT</name><email>your-email@example.com</email></author><entry><title type="html">每周复盘模板</title><link href="https://hxt-t.github.io/%E7%94%9F%E6%B4%BB/2026/07/03/weekly-reflection.html" rel="alternate" type="text/html" title="每周复盘模板" /><published>2026-07-03T19:00:00+08:00</published><updated>2026-07-03T19:00:00+08:00</updated><id>https://hxt-t.github.io/%E7%94%9F%E6%B4%BB/2026/07/03/weekly-reflection</id><content type="html" xml:base="https://hxt-t.github.io/%E7%94%9F%E6%B4%BB/2026/07/03/weekly-reflection.html"><![CDATA[<p>定期复盘是进步的关键。以下是我使用的五维度周复盘框架：</p>
+
+<h2 id="一工作学习">一、工作/学习</h2>
+
+<ul>
+  <li>本周完成的主要事项</li>
+  <li>遇到的困难与解决方案</li>
+  <li>下周重点计划</li>
+</ul>
+
+<h2 id="二健康">二、健康</h2>
+
+<ul>
+  <li>运动次数与类型</li>
+  <li>睡眠质量</li>
+  <li>饮食规律</li>
+</ul>
+
+<h2 id="三关系">三、关系</h2>
+
+<ul>
+  <li>与家人/朋友的互动</li>
+  <li>需要维护的重要关系</li>
+</ul>
+
+<h2 id="四兴趣">四、兴趣</h2>
+
+<ul>
+  <li>阅读、电影、音乐</li>
+  <li>新尝试的事物</li>
+</ul>
+
+<h2 id="五能量与情绪">五、能量与情绪</h2>
+
+<ul>
+  <li>本周情绪基调（1-10 分）</li>
+  <li>能量高峰与低谷时段</li>
+  <li>需要调整的地方</li>
+</ul>
+
+<hr />
+
+<p>坚持记录，时间会给出答案。</p>]]></content><author><name>HXT</name><email>your-email@example.com</email></author><category term="生活" /><category term="复盘" /><category term="效率" /><summary type="html"><![CDATA[定期复盘是进步的关键。以下是我使用的五维度周复盘框架：]]></summary></entry><entry><title type="html">使用 Jekyll + Chirpy 搭建个人博客</title><link href="https://hxt-t.github.io/%E6%8A%80%E6%9C%AF/2026/07/03/jekyll-chirpy-guide.html" rel="alternate" type="text/html" title="使用 Jekyll + Chirpy 搭建个人博客" /><published>2026-07-03T18:30:00+08:00</published><updated>2026-07-03T18:30:00+08:00</updated><id>https://hxt-t.github.io/%E6%8A%80%E6%9C%AF/2026/07/03/jekyll-chirpy-guide</id><content type="html" xml:base="https://hxt-t.github.io/%E6%8A%80%E6%9C%AF/2026/07/03/jekyll-chirpy-guide.html"><![CDATA[<p>Chirpy 是一个简洁、优雅的 Jekyll 主题，非常适合用作个人博客。本文记录我搭建本博客的过程。</p>
+
+<h2 id="为什么选择-chirpy">为什么选择 Chirpy？</h2>
+
+<ol>
+  <li><strong>GitHub Pages 原生支持</strong> — 无需额外服务器</li>
+  <li><strong>响应式设计</strong> — 在手机和桌面都有良好的阅读体验</li>
+  <li><strong>内置功能丰富</strong> — 搜索、标签、分类、时间线、深色模式</li>
+  <li><strong>配置简单</strong> — 改几行 YAML 即可上线</li>
+</ol>
+
+<h2 id="快速部署">快速部署</h2>
+
+<p>最简单的方式是直接 Fork <a href="https://github.com/cotes2020/chirpy-starter">chirpy-starter</a> 仓库，然后修改 <code class="language-plaintext highlighter-rouge">_config.yml</code> 即可。</p>
+
+<h2 id="写作流程">写作流程</h2>
+
+<p>在 <code class="language-plaintext highlighter-rouge">_posts</code> 目录下新建 Markdown 文件，命名格式为 <code class="language-plaintext highlighter-rouge">YYYY-MM-DD-title.md</code>，头部添加 YAML front matter：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">文章标题"</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">2026-07-03 12:00:00 +0800</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">技术</span><span class="pi">]</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">jekyll</span><span class="pi">,</span> <span class="nv">教程</span><span class="pi">]</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>然后直接写 Markdown 内容即可。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://chirpy.cotes.page/">Chirpy 官方文档</a></li>
+  <li><a href="https://jekyllrb.com/">Jekyll 文档</a></li>
+</ul>]]></content><author><name>HXT</name><email>your-email@example.com</email></author><category term="技术" /><category term="jekyll" /><category term="chirpy" /><category term="博客" /><summary type="html"><![CDATA[Chirpy 是一个简洁、优雅的 Jekyll 主题，非常适合用作个人博客。本文记录我搭建本博客的过程。]]></summary></entry><entry><title type="html">Hello World — 博客启航</title><link href="https://hxt-t.github.io/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/2026/07/03/hello-world.html" rel="alternate" type="text/html" title="Hello World — 博客启航" /><published>2026-07-03T18:00:00+08:00</published><updated>2026-07-03T18:00:00+08:00</updated><id>https://hxt-t.github.io/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/2026/07/03/hello-world</id><content type="html" xml:base="https://hxt-t.github.io/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/2026/07/03/hello-world.html"><![CDATA[<p>欢迎来到我的个人博客！</p>
+
+<p>这里将记录我在技术探索与日常生活中的思考与收获。</p>
+
+<h2 id="为什么开始写博客">为什么开始写博客？</h2>
+
+<ul>
+  <li><strong>沉淀知识</strong>：将碎片化的学习整理成体系</li>
+  <li><strong>记录成长</strong>：回头看时，能看到自己走了多远</li>
+  <li><strong>分享交流</strong>：与志同道合的朋友一起进步</li>
+</ul>
+
+<h2 id="接下来会写什么">接下来会写什么？</h2>
+
+<p>目前计划涵盖以下几个方面：</p>
+
+<ul>
+  <li>前端开发、后端技术、DevOps 实践</li>
+  <li>个人效率工具与 workflow</li>
+  <li>阅读、旅行、烹饪等生活记录</li>
+</ul>
+
+<p>无限进步，与君共勉。</p>]]></content><author><name>HXT</name><email>your-email@example.com</email></author><category term="生活" /><category term="随笔" /><category term="开始" /><summary type="html"><![CDATA[欢迎来到我的个人博客！]]></summary></entry></feed>

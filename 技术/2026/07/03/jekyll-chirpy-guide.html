@@ -1,0 +1,35 @@
+<p>Chirpy 是一个简洁、优雅的 Jekyll 主题，非常适合用作个人博客。本文记录我搭建本博客的过程。</p>
+
+<h2 id="为什么选择-chirpy">为什么选择 Chirpy？</h2>
+
+<ol>
+  <li><strong>GitHub Pages 原生支持</strong> — 无需额外服务器</li>
+  <li><strong>响应式设计</strong> — 在手机和桌面都有良好的阅读体验</li>
+  <li><strong>内置功能丰富</strong> — 搜索、标签、分类、时间线、深色模式</li>
+  <li><strong>配置简单</strong> — 改几行 YAML 即可上线</li>
+</ol>
+
+<h2 id="快速部署">快速部署</h2>
+
+<p>最简单的方式是直接 Fork <a href="https://github.com/cotes2020/chirpy-starter">chirpy-starter</a> 仓库，然后修改 <code class="language-plaintext highlighter-rouge">_config.yml</code> 即可。</p>
+
+<h2 id="写作流程">写作流程</h2>
+
+<p>在 <code class="language-plaintext highlighter-rouge">_posts</code> 目录下新建 Markdown 文件，命名格式为 <code class="language-plaintext highlighter-rouge">YYYY-MM-DD-title.md</code>，头部添加 YAML front matter：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">文章标题"</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">2026-07-03 12:00:00 +0800</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">技术</span><span class="pi">]</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">jekyll</span><span class="pi">,</span> <span class="nv">教程</span><span class="pi">]</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>然后直接写 Markdown 内容即可。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="https://chirpy.cotes.page/">Chirpy 官方文档</a></li>
+  <li><a href="https://jekyllrb.com/">Jekyll 文档</a></li>
+</ul>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#e0e7ff"/>
+  <circle cx="100" cy="80" r="40" fill="#6366f1"/>
+  <path d="M40 180 Q100 130 160 180" fill="#6366f1"/>
+  <text x="100" y="190" font-family="Arial" font-size="14" fill="#4f46e5" text-anchor="middle">HXT</text>
+</svg>
