@@ -1,0 +1,74 @@
+# Jekyll Configuration
+# 使用 Chirpy 主题
+# 文档: https://chirpy.cotes.page/
+
+theme: jekyll-theme-chirpy
+
+# 站点信息
+title: "HXT Blog"
+tagline: "记录思考与成长"
+description: >-
+  一个简洁的个人博客，分享技术、生活与无限进步。
+
+# 语言设置
+lang: zh-CN
+timezone: Asia/Shanghai
+
+# 作者信息
+author:
+  name: "HXT"
+  email: "your-email@example.com"
+  links:
+    - https://github.com/hxt-t
+
+# GitHub 设置
+github:
+  username: hxt-t
+
+# 社交链接
+social:
+  name: HXT
+  links:
+    - https://github.com/hxt-t
+
+# 网站 URL
+url: "https://hxt-t.github.io"
+
+# 分页
+paginate: 8
+
+# 主题模式 (light | dark | 留空跟随系统)
+theme_mode:
+
+# 版权
+copyright: "© 2024 HXT."
+
+# 打赏/赞助（可选）
+sponsor:
+  enable: false
+
+# 访问统计
+analytics:
+  google:
+    id: # 可选，填写 Google Analytics ID
+
+# 目录
+toc: true
+
+# 插件
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
+
+# 忽略文件
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
