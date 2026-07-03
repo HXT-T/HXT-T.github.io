@@ -1,8 +1,3 @@
----
----
-
-@import "main";
-
 /* 自定义样式 — 仿 oksanye.com 风格 */
 
 /* 侧边栏标题 */
@@ -11,7 +6,7 @@
   letter-spacing: 0.05em;
 }
 
-/* 文章卡片阴影 */
+/* 文章卡片 */
 .post-card {
   border-radius: 12px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -33,17 +28,17 @@
   font-size: 0.85rem;
 }
 
-/* 阅读更多按钮 */
+/* 阅读更多 */
 .post-tail-wrapper .read-more {
   font-weight: 600;
 }
 
-/* 代码块圆角 */
+/* 代码块 */
 .highlight {
   border-radius: 8px;
 }
 
-/* 标签样式 */
+/* 标签 */
 .post-tag {
   border-radius: 4px;
   padding: 2px 8px;
