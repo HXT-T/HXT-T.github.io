@@ -4,6 +4,7 @@
 # ==========================
 # 基础设置
 # ==========================
+theme: jekyll-theme-chirpy  # 使用 Chirpy 主题
 baseurl: ""               # 子路径，为空表示根目录
 title: "HXT Blog"         # 网站标题
 tagline: "记录思考与成长"   # 副标题
@@ -20,10 +21,10 @@ url: "https://hxt-t.github.io"  # 网站地址
 # ==========================
 author:
   name: "HXT"
-  email: "your-email@example.com"
+  email: "hxt-t@users.noreply.github.com"
 
 # 头像（放在 assets/img/ 下，或直接用 GitHub 头像）
-avatar: "/assets/img/avatar.png"
+avatar: "/assets/img/avatar.svg"
 
 # 侧边栏简介（仿 oksanye.com 风格）
 bio: "用更多的了解跨越隔阂与偏见"
@@ -35,13 +36,13 @@ bio: "用更多的了解跨越隔阂与偏见"
 social:
   name: HXT
   links:
-    - https://github.com/hxt-t
+    - https://github.com/HXT-T
 
 # ==========================
 # GitHub 设置
 # ==========================
 github:
-  username: hxt-t
+  username: HXT-T
 
 twitter:
   username:               # 如有 Twitter 可填写
@@ -67,10 +68,10 @@ toc: true
 comments:
   active: giscus
   giscus:
-    repo: hxt-t/hxt-t.github.io
-    repo_id: ""           # 访问 https://giscus.app/ 获取
+    repo: HXT-T/HXT-T.github.io
+    repo_id: "R_kgDOKNUXVA"           # 已从 GitHub API 获取
     category: Announcements
-    category_id: ""       # 访问 https://giscus.app/ 获取
+    category_id: "DIC_kwDOKNUXVM4DA3w1"  # 已从 Giscus API 获取
     mapping: pathname
     input_position: bottom
     lang: zh-CN
@@ -96,7 +97,7 @@ theme_attribution: true
 # 打赏/赞助（可选）
 # ==========================
 sponsor:
-  enable: false
+  enable: true
 
 # ==========================
 # 搜索
@@ -112,7 +113,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-archives
 
 # ==========================
 # 忽略文件

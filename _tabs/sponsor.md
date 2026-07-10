@@ -11,7 +11,7 @@ order: 9
 
 ## 方式
 
-- **GitHub Sponsors**: [https://github.com/sponsors/hxt-t](https://github.com/sponsors/hxt-t)
+- **GitHub Sponsors**: [https://github.com/sponsors/HXT-T](https://github.com/sponsors/HXT-T)
 - **Buy Me a Coffee**（即将开通）
 
 > 赞助不是必须的，你的阅读和反馈就是对我最大的支持。

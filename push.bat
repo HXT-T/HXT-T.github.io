@@ -5,7 +5,7 @@ echo   博客推送脚本 - HXT Blog
 echo ========================================
 echo.
 
-cd /d "C:\Users\hua_xu\Documents\kimi\workspace\hxt-t.github.io"
+cd /d "e:\AAA\HXT-T.github.io"
 
 echo [1/3] 检查本地更改...
 git status --short

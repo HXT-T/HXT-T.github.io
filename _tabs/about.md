@@ -16,7 +16,7 @@ order: 10
 
 ## 联系我
 
-- GitHub: [@hxt-t](https://github.com/hxt-t)
-- 邮箱: your-email@example.com
+- GitHub: [@HXT-T](https://github.com/HXT-T)
+- 邮箱: [hxt-t@users.noreply.github.com](mailto:hxt-t@users.noreply.github.com)
 
 欢迎通过 GitHub Issues 交流。
