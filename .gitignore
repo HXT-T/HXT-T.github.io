@@ -21,6 +21,9 @@ node_modules/
 .idea/
 *.swp
 
+# Local Git worktrees
+.worktrees/
+
 # OS
 .DS_Store
 Thumbs.db
