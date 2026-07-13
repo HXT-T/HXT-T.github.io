@@ -27,3 +27,9 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
+
+# Obsidian personal state and caches
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.trash/
