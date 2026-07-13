@@ -3,6 +3,29 @@ param(
   [string]$Path
 )
 
+function Get-FrontMatterScalar {
+  param(
+    [string]$Yaml,
+    [string]$Field
+  )
+
+  $pattern = '(?m)^' + [regex]::Escape($Field) + '[ \t]*:[ \t]*(.*)$'
+  $match = [regex]::Match($Yaml, $pattern)
+  if (-not $match.Success) {
+    return $null
+  }
+
+  $value = $match.Groups[1].Value.Trim()
+  if ($value.Length -ge 2) {
+    $first = $value[0]
+    $last = $value[$value.Length - 1]
+    if (($first -eq '"' -and $last -eq '"') -or ($first -eq "'" -and $last -eq "'")) {
+      $value = $value.Substring(1, $value.Length - 2)
+    }
+  }
+  return $value
+}
+
 $errors = [System.Collections.Generic.List[string]]::new()
 
 if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
@@ -24,23 +47,37 @@ if (-not $frontMatter.Success) {
   $errors.Add('File must start with YAML Front Matter delimited by --- lines.')
 } else {
   $yaml = $frontMatter.Groups[1].Value
+  $fieldPresent = @{}
   foreach ($field in 'title', 'date', 'room', 'status', 'topics', 'categories', 'tags', 'description', 'published') {
-    if ($yaml -notmatch "(?m)^$([regex]::Escape($field))\s*:") {
+    $fieldPresent[$field] = [regex]::IsMatch($yaml, "(?m)^$([regex]::Escape($field))[ \t]*:")
+    if (-not $fieldPresent[$field]) {
       $errors.Add("Missing Front Matter field: $field")
     }
   }
 
-  if ($yaml -match '(?m)^date\s*:\s*(.+)$' -and $Matches[1].Trim() -notmatch '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \+0800$') {
-    $errors.Add('date must match YYYY-MM-DD HH:mm:ss +0800.')
+  if ($fieldPresent['date']) {
+    $date = Get-FrontMatterScalar -Yaml $yaml -Field 'date'
+    if ($date -notmatch '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \+0800$') {
+      $errors.Add('date must match YYYY-MM-DD HH:mm:ss +0800.')
+    }
   }
-  if ($yaml -match '(?m)^room\s*:\s*(\S+)' -and $Matches[1] -notin 'study', 'garden', 'workbench', 'collection') {
-    $errors.Add('room must be study, garden, workbench, or collection.')
+  if ($fieldPresent['room']) {
+    $room = Get-FrontMatterScalar -Yaml $yaml -Field 'room'
+    if ($room -notin 'study', 'garden', 'workbench', 'collection') {
+      $errors.Add('room must be study, garden, workbench, or collection.')
+    }
   }
-  if ($yaml -match '(?m)^status\s*:\s*(\S+)' -and $Matches[1] -notin 'seed', 'sprout', 'growing', 'evergreen', 'dormant') {
-    $errors.Add('status must be seed, sprout, growing, evergreen, or dormant.')
+  if ($fieldPresent['status']) {
+    $status = Get-FrontMatterScalar -Yaml $yaml -Field 'status'
+    if ($status -notin 'seed', 'sprout', 'growing', 'evergreen', 'dormant') {
+      $errors.Add('status must be seed, sprout, growing, evergreen, or dormant.')
+    }
   }
-  if ($yaml -match '(?m)^description\s*:\s*"?\s*"?\s*$') {
-    $errors.Add('description must not be empty when publishing.')
+  if ($fieldPresent['description']) {
+    $description = Get-FrontMatterScalar -Yaml $yaml -Field 'description'
+    if ([string]::IsNullOrWhiteSpace($description) -or $description -eq 'null' -or $description -eq '~') {
+      $errors.Add('description must not be empty when publishing.')
+    }
   }
 }
 
