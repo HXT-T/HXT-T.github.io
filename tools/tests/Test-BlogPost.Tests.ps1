@@ -143,6 +143,9 @@ try {
   foreach ($description in "'Valid description'", '"Valid description"') {
     Invoke-ValidatorTextCase -Name "valid quoted description $description" -Markdown (New-PostText -Description $description) -ExpectedExitCode 0 -ExpectedMessage 'Post validation passed:'
   }
+  foreach ($description in "'null'", '"null"', "'~'", '"~"') {
+    Invoke-ValidatorTextCase -Name "valid quoted sentinel description $description" -Markdown (New-PostText -Description $description) -ExpectedExitCode 0 -ExpectedMessage 'Post validation passed:'
+  }
   foreach ($description in '', "''", '""', 'null', '~') {
     Invoke-ValidatorTextCase -Name "invalid empty description '$description'" -Markdown (New-PostText -Description $description) -ExpectedExitCode 1 -ExpectedMessage $descriptionError
   }

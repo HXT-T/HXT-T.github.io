@@ -16,14 +16,19 @@ function Get-FrontMatterScalar {
   }
 
   $value = $match.Groups[1].Value.Trim()
+  $isQuoted = $false
   if ($value.Length -ge 2) {
     $first = $value[0]
     $last = $value[$value.Length - 1]
     if (($first -eq '"' -and $last -eq '"') -or ($first -eq "'" -and $last -eq "'")) {
+      $isQuoted = $true
       $value = $value.Substring(1, $value.Length - 2)
     }
   }
-  return $value
+  return [pscustomobject]@{
+    Value = $value
+    IsQuoted = $isQuoted
+  }
 }
 
 $errors = [System.Collections.Generic.List[string]]::new()
@@ -57,25 +62,25 @@ if (-not $frontMatter.Success) {
 
   if ($fieldPresent['date']) {
     $date = Get-FrontMatterScalar -Yaml $yaml -Field 'date'
-    if ($date -notmatch '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \+0800$') {
+    if ($date.Value -notmatch '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \+0800$') {
       $errors.Add('date must match YYYY-MM-DD HH:mm:ss +0800.')
     }
   }
   if ($fieldPresent['room']) {
     $room = Get-FrontMatterScalar -Yaml $yaml -Field 'room'
-    if ($room -notin 'study', 'garden', 'workbench', 'collection') {
+    if ($room.Value -notin 'study', 'garden', 'workbench', 'collection') {
       $errors.Add('room must be study, garden, workbench, or collection.')
     }
   }
   if ($fieldPresent['status']) {
     $status = Get-FrontMatterScalar -Yaml $yaml -Field 'status'
-    if ($status -notin 'seed', 'sprout', 'growing', 'evergreen', 'dormant') {
+    if ($status.Value -notin 'seed', 'sprout', 'growing', 'evergreen', 'dormant') {
       $errors.Add('status must be seed, sprout, growing, evergreen, or dormant.')
     }
   }
   if ($fieldPresent['description']) {
     $description = Get-FrontMatterScalar -Yaml $yaml -Field 'description'
-    if ([string]::IsNullOrWhiteSpace($description) -or $description -eq 'null' -or $description -eq '~') {
+    if ([string]::IsNullOrWhiteSpace($description.Value) -or (-not $description.IsQuoted -and $description.Value -in 'null', '~')) {
       $errors.Add('description must not be empty when publishing.')
     }
   }
