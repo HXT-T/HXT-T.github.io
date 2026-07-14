@@ -39,7 +39,7 @@ if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
 }
 
 $resolved = (Resolve-Path -LiteralPath $Path).Path
-$text = Get-Content -LiteralPath $resolved -Raw
+$text = Get-Content -LiteralPath $resolved -Raw -Encoding UTF8
 $name = [System.IO.Path]::GetFileName($resolved)
 $parent = Split-Path (Split-Path $resolved -Parent) -Leaf
 
@@ -80,7 +80,9 @@ if (-not $frontMatter.Success) {
   }
   if ($fieldPresent['description']) {
     $description = Get-FrontMatterScalar -Yaml $yaml -Field 'description'
-    if ([string]::IsNullOrWhiteSpace($description.Value) -or (-not $description.IsQuoted -and $description.Value -in 'null', '~')) {
+    $published = Get-FrontMatterScalar -Yaml $yaml -Field 'published'
+    $isPublished = $published -and $published.Value -eq 'true'
+    if ($isPublished -and ([string]::IsNullOrWhiteSpace($description.Value) -or (-not $description.IsQuoted -and $description.Value -in 'null', '~'))) {
       $errors.Add('description must not be empty when publishing.')
     }
   }

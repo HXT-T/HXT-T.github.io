@@ -15,6 +15,7 @@ function New-PostText {
     [string]$Status = 'seed',
     [AllowEmptyString()]
     [string]$Description = '"Valid description."',
+    [string]$Published = 'true',
     [string]$Body = 'Standard Markdown body.',
     [string]$OmitField
   )
@@ -28,7 +29,7 @@ function New-PostText {
     categories = '[garden]'
     tags = '[jekyll]'
     description = $Description
-    published = 'true'
+    published = $Published
   }
 
   $lines = [System.Collections.Generic.List[string]]::new()
@@ -126,6 +127,13 @@ try {
   Invoke-ValidatorTextCase -Name 'malformed date' -Markdown (New-PostText -Date '2026-07-13') -ExpectedExitCode 1 -ExpectedMessage $dateError
   Invoke-ValidatorTextCase -Name 'date trailing token' -Markdown (New-PostText -Date '2026-07-13 12:00:00 +0800 extra') -ExpectedExitCode 1 -ExpectedMessage $dateError
 
+  $chineseBody = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('6L+Z6YeM5YyF5ZCr5Lit5paH5q2j5paH77yM55So5LqO6aqM6K+BIFVURi04IOivu+WPluOAgg=='))
+  $chineseTitle = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('5LiA5qyh55yf5a6e55qE5rWL6K+V'))
+  $chineseTopic = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('5Lit5paH5Li76aKY'))
+  $utf8ChinesePost = New-PostText -Body $chineseBody
+  $utf8ChinesePost = $utf8ChinesePost.Replace('title: "A real test"', ('title: "' + $chineseTitle + '"')).Replace('topics: [test]', ('topics: [' + $chineseTopic + ']'))
+  Invoke-ValidatorTextCase -Name 'UTF-8 Chinese metadata and body' -Markdown $utf8ChinesePost -ExpectedExitCode 0 -ExpectedMessage 'Post validation passed:'
+
   foreach ($room in "'garden'", '"garden"') {
     Invoke-ValidatorTextCase -Name "valid quoted room $room" -Markdown (New-PostText -Room $room) -ExpectedExitCode 0 -ExpectedMessage 'Post validation passed:'
   }
@@ -149,6 +157,8 @@ try {
   foreach ($description in '', "''", '""', 'null', '~') {
     Invoke-ValidatorTextCase -Name "invalid empty description '$description'" -Markdown (New-PostText -Description $description) -ExpectedExitCode 1 -ExpectedMessage $descriptionError
   }
+  Invoke-ValidatorTextCase -Name 'draft allows empty description' -Markdown (New-PostText -Description '' -Published 'false') -ExpectedExitCode 0 -ExpectedMessage 'Post validation passed:'
+  Invoke-ValidatorTextCase -Name 'published rejects empty description' -Markdown (New-PostText -Description '' -Published 'true') -ExpectedExitCode 1 -ExpectedMessage $descriptionError
 
   Invoke-ValidatorTextCase -Name 'Wiki link' -Markdown (New-PostText -Body 'Contains [[Wiki Link]].') -ExpectedExitCode 1 -ExpectedMessage $wikiError
   Invoke-ValidatorTextCase -Name 'Wiki embed' -Markdown (New-PostText -Body 'Contains ![[image.png]].') -ExpectedExitCode 1 -ExpectedMessage $wikiError
