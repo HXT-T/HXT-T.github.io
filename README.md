@@ -8,6 +8,8 @@
 
 ## 快速开始
 
+使用 Obsidian 写作与发布：[完整教程](docs/authoring-with-obsidian.md)
+
 ### 本地预览（可选）
 
 ```bash
