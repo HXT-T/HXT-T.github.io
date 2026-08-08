@@ -139,16 +139,13 @@ function AboutModal({ onClose }) {
 function Footer() {
   return (
     <footer className="footer">
-      <p>{footer.text}</p>
-      <p className="footer-links">
-        <a href={site.blogUrl}>博客</a>
-        <span className="dot">·</span>
+      <p>
+        {footer.copyright} · 用 ❤️ 构建 · <a href={site.blogUrl}>博客</a>
+        {' · '}
         <a href={site.githubUrl} target="_blank" rel="noreferrer">
           GitHub
         </a>
       </p>
-      <p className="footer-tech">{footer.tech}</p>
-      <p className="footer-copy">{footer.copyright}</p>
     </footer>
   )
 }

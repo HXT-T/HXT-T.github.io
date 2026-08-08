@@ -54,7 +54,5 @@ export const about = {
 }
 
 export const footer = {
-  text: '用 ❤️ 与 React 构建',
-  tech: 'React 18 · Vite 6 · GitHub Actions 自动部署',
   copyright: `© ${new Date().getFullYear()} yuyuyuu`,
 }

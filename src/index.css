@@ -456,44 +456,21 @@ body {
    Footer
    ============================================ */
 .footer {
-  padding: 48px 24px 40px;
+  padding: 18px 24px;
   text-align: center;
   color: var(--color-muted);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
 }
 
-.footer-links {
-  margin-top: 8px;
-}
-
-.footer-links a {
-  color: var(--color-text);
-  font-weight: 600;
+.footer a {
+  color: var(--color-muted);
+  font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.footer-links a:hover {
+.footer a:hover {
   color: var(--rose);
-}
-
-.footer-links .dot {
-  margin: 0 10px;
-  opacity: 0.5;
-}
-
-.footer-tech {
-  margin-top: 12px;
-  font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  color: var(--pink);
-  opacity: 0.9;
-}
-
-.footer-copy {
-  margin-top: 8px;
-  opacity: 0.7;
 }
 
 /* ============================================
