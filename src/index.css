@@ -74,15 +74,31 @@ body {
 }
 
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo span {
   font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: 0.02em;
-  text-decoration: none;
   background: var(--gradient-text);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+.cat-logo {
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(230, 73, 128, 0.28));
+  transition: transform 0.3s ease;
+}
+
+.nav-logo:hover .cat-logo {
+  transform: rotate(-8deg) scale(1.1);
 }
 
 .nav-categories {
@@ -121,54 +137,10 @@ body {
   text-align: center;
   padding: 120px 24px 64px;
   overflow: hidden;
-}
-
-/* 粉色渐变 blob 背景 */
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.55;
-  pointer-events: none;
-  animation: blob-float 14s ease-in-out infinite;
-}
-
-.blob-1 {
-  width: 44vw;
-  height: 44vw;
-  max-width: 520px;
-  max-height: 520px;
-  top: -10%;
-  left: -8%;
-  background: radial-gradient(circle at 30% 30%, var(--blush), var(--pink));
-}
-
-.blob-2 {
-  width: 40vw;
-  height: 40vw;
-  max-width: 480px;
-  max-height: 480px;
-  bottom: -14%;
-  right: -6%;
-  background: radial-gradient(circle at 60% 40%, var(--lilac), var(--lavender));
-  animation-delay: -5s;
-}
-
-.blob-3 {
-  width: 26vw;
-  height: 26vw;
-  max-width: 320px;
-  max-height: 320px;
-  top: 28%;
-  right: 16%;
-  background: radial-gradient(circle at 50% 50%, #ffe3ee, var(--pink-light));
-  animation-delay: -9s;
-}
-
-@keyframes blob-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(4%, -6%) scale(1.08); }
-  66% { transform: translate(-5%, 4%) scale(0.94); }
+  /* 樱花背景图 + 粉白渐变罩层，保证文字可读 */
+  background:
+    linear-gradient(rgba(255, 247, 250, 0.55), rgba(255, 247, 250, 0.82)),
+    url('/hero-bg.jpg') center / cover no-repeat;
 }
 
 .hero-content {
@@ -505,7 +477,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .blob,
   .hero-quote,
   .hero-tagline,
   .search,

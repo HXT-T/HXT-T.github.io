@@ -2,7 +2,7 @@
 // 站点内容配置 —— 以后替换文案只改这里即可
 // ============================================
 export const site = {
-  nickname: 'hxt-t',
+  nickname: 'yuyuyuu',
   title: '美好事物的追寻者',
   tagline: '不断寻求美好事物，并让自己成为美好本身。',
   blogUrl: '/blog',
@@ -28,7 +28,7 @@ export const quote = {
 export const about = {
   heading: '关于我',
   paragraphs: [
-    '你好！我是 hxt-t。一个不断寻求美好事物，并让自己成为美好本身的人。',
+    '你好！我是 yuyuyuu。一个不断寻求美好事物，并让自己成为美好本身的人。',
     '我收集生活里那些发光的瞬间：一本好书的某个段落、旅途中偶遇的黄昏、深夜里关于存在的哲学追问，还有代码世界中一次优雅的抽象。感性让我向往美，理性让我理解美。',
     '这个角落用来安放我遇见的美好、零碎的思考与技术探索，欢迎随便逛逛，也欢迎来我的博客坐坐。',
   ],
@@ -38,5 +38,5 @@ export const about = {
 export const footer = {
   text: '用 ❤️ 与 React 构建',
   tech: 'React 18 · Vite 6 · GitHub Actions 自动部署',
-  copyright: `© ${new Date().getFullYear()} hxt-t`,
+  copyright: `© ${new Date().getFullYear()} yuyuyuu`,
 }
