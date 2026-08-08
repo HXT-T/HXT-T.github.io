@@ -1,30 +1,78 @@
-import { site, about, footer } from './data.js'
+import { useState } from 'react'
+import { site, categories, quote, about, footer } from './data.js'
 
 function Blob({ className }) {
   return <div className={`blob ${className}`} aria-hidden="true" />
 }
 
-function Hero() {
+function Nav() {
   return (
-    <section className="hero">
+    <header className="nav">
+      <a className="nav-logo" href="#top">
+        {site.nickname}
+      </a>
+      <nav className="nav-categories" aria-label="内容分类">
+        {categories.map((name) => (
+          <a
+            className="nav-chip"
+            key={name}
+            href={`${site.blogUrl}?category=${encodeURIComponent(name)}`}
+          >
+            {name}
+          </a>
+        ))}
+      </nav>
+    </header>
+  )
+}
+
+function Hero() {
+  const [keyword, setKeyword] = useState('')
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    const q = keyword.trim()
+    window.location.href = q
+      ? `${site.blogUrl}?q=${encodeURIComponent(q)}`
+      : site.blogUrl
+  }
+
+  return (
+    <section className="hero" id="top">
       <Blob className="blob-1" />
       <Blob className="blob-2" />
       <Blob className="blob-3" />
       <div className="hero-content">
-        <span className="hero-badge">👋 你好，欢迎来到我的小站</span>
-        <h1 className="hero-name">
-          我是 <span className="gradient-text">{site.nickname}</span>
-        </h1>
-        <p className="hero-title">{site.title}</p>
-        <p className="hero-tagline">{site.tagline}</p>
-        <div className="hero-actions">
-          <a className="btn btn-primary" href={site.blogUrl}>
-            访问博客 <span className="btn-arrow">→</span>
-          </a>
-          <a className="btn btn-ghost" href="#about">
-            了解更多
-          </a>
-        </div>
+        <blockquote className="hero-quote">
+          <p className="quote-text">{quote.text}</p>
+          <cite className="quote-author">—— {quote.author}</cite>
+        </blockquote>
+        <p className="hero-tagline">
+          {site.nickname} · {site.tagline}
+        </p>
+        <form className="search" role="search" onSubmit={handleSearch}>
+          <svg
+            className="search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.5" y1="16.5" x2="21" y2="21" />
+          </svg>
+          <input
+            type="search"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="搜索美好，或随便逛逛……"
+            aria-label="搜索博客"
+          />
+          <button type="submit">搜索</button>
+        </form>
       </div>
       <div className="scroll-hint" aria-hidden="true">
         <span />
@@ -71,6 +119,7 @@ function Footer() {
           GitHub
         </a>
       </p>
+      <p className="footer-tech">{footer.tech}</p>
       <p className="footer-copy">{footer.copyright}</p>
     </footer>
   )
@@ -79,6 +128,7 @@ function Footer() {
 export default function App() {
   return (
     <>
+      <Nav />
       <Hero />
       <About />
       <Footer />
