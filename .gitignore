@@ -1,35 +1,3 @@
-# Jekyll
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-
-# Ruby
-gemfiles/
-.ruby-version
-*.gem
-
-# Bundler
-.bundle/
-vendor/
-
-# Node
-node_modules/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-
-# Local Git worktrees
-.worktrees/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Obsidian personal state and caches
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
-.obsidian/cache/
-.trash/
+node_modules
+dist
+*.local
