@@ -11,13 +11,15 @@ function Nav({ onOpenAbout }) {
         <span>{site.nickname}</span>
       </a>
       <nav className="nav-categories" aria-label="内容分类">
-        {categories.map((name) => (
+        {categories.map((c) => (
           <a
             className="nav-chip"
-            key={name}
-            href={`${site.blogUrl}?category=${encodeURIComponent(name)}`}
+            key={c.name}
+            href={
+              c.href ?? `${site.blogUrl}?category=${encodeURIComponent(c.name)}`
+            }
           >
-            {name}
+            {c.name}
           </a>
         ))}
         <button

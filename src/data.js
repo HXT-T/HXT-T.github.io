@@ -9,15 +9,43 @@ export const site = {
   githubUrl: 'https://github.com/hxt-t',
 }
 
-// 首页顶部的分类导航，点击跳转到博客对应分类
+// 首页顶部的分类导航；href 可覆盖默认跳转（默认跳博客对应分类）
 export const categories = [
-  '哲学思考',
-  '技术探索',
-  '阅读',
-  '旅行',
-  '美食',
-  '摄影',
+  { name: '哲学思考' },
+  { name: '技术探索' },
+  { name: '阅读' },
+  { name: '旅行', href: '/travel' },
+  { name: '美食' },
+  { name: '摄影' },
 ]
+
+// 旅行页内容 —— trips 里是示例，换成你自己的旅行故事
+export const travel = {
+  badge: 'TRAVEL · 在路上',
+  title: '把世界走成一首长诗',
+  quote: {
+    text: '世界是一本书，不旅行的人只读了一页。',
+    author: '奥古斯丁',
+  },
+  trips: [
+    {
+      date: '示例 · 某年春',
+      place: '京都',
+      note: '樱花落在哲学之道上，走着走着，就想明白了一些事。',
+    },
+    {
+      date: '示例 · 某年夏',
+      place: '青海湖',
+      note: '湖面是天空的镜子，列车从画里缓缓开过。',
+    },
+    {
+      date: '示例 · 某年秋',
+      place: '重庆',
+      note: '在洪崖洞的灯火里吃火锅，辣出了眼泪，也笑出了声。',
+    },
+  ],
+  wishlist: ['冰岛', '摩洛哥', '北海道', '新西兰', '大理', '喀什'],
+}
 
 // 首页名言库 —— 每次打开随机显示一句，想增删改这里
 export const quotes = [

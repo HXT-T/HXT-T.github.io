@@ -15,7 +15,9 @@ npm run dev    # http://localhost:5173
 
 ## 修改内容
 
-所有文案（昵称、头衔、介绍、标签、链接）集中在 `src/data.js`。
+所有文案（昵称、头衔、介绍、标签、链接、名言库、旅行足迹）集中在 `src/data.js`。
+
+页面结构：首页 `index.html` → `/`，旅行页 `travel.html` → `/travel`（多页入口见 `vite.config.js`）。
 
 ## 部署
 
