@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import { site, categories, quote, about, footer } from './data.js'
+import { useEffect, useState } from 'react'
+import { site, categories, quotes, about, footer } from './data.js'
 
-
-function Nav() {
+function Nav({ onOpenAbout }) {
   return (
     <header className="nav">
       <a className="nav-logo" href="#top">
@@ -21,6 +20,13 @@ function Nav() {
             {name}
           </a>
         ))}
+        <button
+          type="button"
+          className="nav-chip nav-chip-about"
+          onClick={onOpenAbout}
+        >
+          关于我
+        </button>
       </nav>
     </header>
   )
@@ -28,6 +34,10 @@ function Nav() {
 
 function Hero() {
   const [keyword, setKeyword] = useState('')
+  // 每次打开随机抽一句名言；用惰性初始化保证 StrictMode 下不变
+  const [quote] = useState(
+    () => quotes[Math.floor(Math.random() * quotes.length)],
+  )
 
   const handleSearch = (event) => {
     event.preventDefault()
@@ -71,17 +81,36 @@ function Hero() {
           <button type="submit">搜索</button>
         </form>
       </div>
-      <div className="scroll-hint" aria-hidden="true">
-        <span />
-      </div>
     </section>
   )
 }
 
-function About() {
+function AboutModal({ onClose }) {
+  // ESC 关闭 + 打开时锁住背景滚动
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose])
+
   return (
-    <section className="about" id="about">
-      <div className="about-card">
+    <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="about-card modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label="关于我"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose} aria-label="关闭">
+          ×
+        </button>
         <div className="about-avatar" aria-hidden="true">
           <span className="logo-circle logo-circle-lg">
             <img src="/logo.jpg" alt="" />
@@ -103,7 +132,7 @@ function About() {
           ))}
         </ul>
       </div>
-    </section>
+    </div>
   )
 }
 
@@ -125,12 +154,14 @@ function Footer() {
 }
 
 export default function App() {
+  const [aboutOpen, setAboutOpen] = useState(false)
+
   return (
     <>
-      <Nav />
+      <Nav onOpenAbout={() => setAboutOpen(true)} />
       <Hero />
-      <About />
       <Footer />
+      {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
     </>
   )
 }
