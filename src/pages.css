@@ -1,0 +1,249 @@
+/* ============================================
+   子页面共享骨架 —— 顶栏 / 页头 / 页脚
+   配色与首页、旅行页同源：粉 / 紫，轻盈文艺
+   ============================================ */
+:root {
+  --color-bg: #fff7fa;
+  --color-text: #432c37;
+  --color-muted: #93707f;
+
+  --rose: #e64980;
+  --pink: #f783ac;
+  --pink-light: #faa2c1;
+  --blush: #ffd6e7;
+  --lavender: #b197fc;
+  --lilac: #e5dbff;
+  --sky: #91a7ff;
+
+  --gradient-primary: linear-gradient(120deg, var(--rose), var(--pink) 55%, var(--lavender));
+  --gradient-text: linear-gradient(120deg, var(--rose), var(--pink) 45%, var(--lavender));
+
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 20px 60px rgba(230, 73, 128, 0.12);
+  --shadow-btn: 0 8px 24px rgba(230, 73, 128, 0.32);
+
+  --font-sans: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* 页脚自然贴底 */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.p-main {
+  flex: 1;
+  width: 100%;
+}
+
+/* ============================================
+   顶栏
+   ============================================ */
+.p-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 32px;
+  background: rgba(255, 247, 250, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(230, 73, 128, 0.08);
+}
+
+.p-back {
+  flex-shrink: 0;
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.p-back:hover {
+  color: var(--rose);
+  background: rgba(230, 73, 128, 0.08);
+  transform: translateY(-1px);
+}
+
+.p-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.p-link {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.p-link:hover {
+  color: var(--rose);
+  background: rgba(230, 73, 128, 0.08);
+}
+
+.p-brand {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.p-brand span {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.p-brand img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(230, 73, 128, 0.25);
+}
+
+/* ============================================
+   页头 —— 徽章 + 标题 + 副标题
+   ============================================ */
+.p-hero {
+  position: relative;
+  text-align: center;
+  padding: 160px 24px 40px;
+  background:
+    radial-gradient(60% 80% at 15% 0%, rgba(247, 131, 172, 0.14), transparent 70%),
+    radial-gradient(50% 70% at 85% 10%, rgba(177, 151, 252, 0.14), transparent 70%);
+}
+
+@keyframes p-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.p-badge {
+  display: inline-block;
+  padding: 8px 22px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 214, 231, 0.55);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--rose);
+  animation: p-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.p-title {
+  margin-top: 20px;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: p-rise 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.p-sub {
+  margin-top: 14px;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+  letter-spacing: 0.05em;
+  animation: p-rise 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ============================================
+   页脚
+   ============================================ */
+.p-footer {
+  padding: 18px 24px 30px;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.p-footer a {
+  color: var(--color-muted);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.p-footer a:hover {
+  color: var(--rose);
+}
+
+/* ============================================
+   响应式
+   ============================================ */
+@media (max-width: 640px) {
+  .p-nav {
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .p-back {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+  }
+
+  .p-brand span {
+    display: none;
+  }
+
+  .p-hero {
+    padding: 130px 20px 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-badge,
+  .p-title,
+  .p-sub {
+    animation: none;
+  }
+}

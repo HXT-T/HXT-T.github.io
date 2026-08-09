@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { site, categories, quotes, about, footer } from './data.js'
+import { site, categories, navExtras, quotes, about, footer } from './data.js'
+import Sakura from './components/Sakura.jsx'
 
 function Nav({ onOpenAbout }) {
   return (
@@ -20,6 +21,11 @@ function Nav({ onOpenAbout }) {
             }
           >
             {c.name}
+          </a>
+        ))}
+        {navExtras.map((p) => (
+          <a className="nav-chip" key={p.href} href={p.href}>
+            {p.name}
           </a>
         ))}
         <button
@@ -51,6 +57,7 @@ function Hero() {
 
   return (
     <section className="hero" id="top">
+      <Sakura />
       <div className="hero-content">
         <blockquote className="hero-quote">
           <p className="quote-text">{quote.text}</p>

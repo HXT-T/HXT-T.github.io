@@ -1,0 +1,101 @@
+/* ============================================
+   「瞬间」页样式 —— 竖向时间线
+   共享骨架（顶栏/页头/页脚）在 ../pages.css
+   ============================================ */
+.m-timeline {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 24px 88px 40px;
+}
+
+/* 贯穿的渐变竖线 */
+.m-timeline::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 24px;
+  bottom: 88px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(230, 73, 128, 0.35),
+    rgba(177, 151, 252, 0.3)
+  );
+}
+
+.m-item {
+  position: relative;
+  margin-bottom: 28px;
+  animation: p-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 时间线上的圆点，压在竖线上 */
+.m-item::before {
+  content: '';
+  position: absolute;
+  left: -27px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 0 4px rgba(255, 214, 231, 0.6);
+}
+
+/* 入场依次延迟，形成瀑布感 */
+.m-item:nth-child(1) { animation-delay: 0.35s; }
+.m-item:nth-child(2) { animation-delay: 0.45s; }
+.m-item:nth-child(3) { animation-delay: 0.55s; }
+.m-item:nth-child(4) { animation-delay: 0.65s; }
+.m-item:nth-child(5) { animation-delay: 0.75s; }
+.m-item:nth-child(n + 6) { animation-delay: 0.85s; }
+
+.m-date {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--pink);
+}
+
+.m-card {
+  padding: 20px 24px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  font-size: 1rem;
+  line-height: 1.8;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.m-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 48px rgba(230, 73, 128, 0.18);
+}
+
+/* ============================================
+   响应式
+   ============================================ */
+@media (max-width: 640px) {
+  .m-timeline {
+    padding-left: 34px;
+    padding-bottom: 64px;
+  }
+
+  .m-timeline::before {
+    left: 13px;
+  }
+
+  .m-item::before {
+    left: -27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m-item {
+    animation: none;
+  }
+}

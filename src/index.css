@@ -193,6 +193,13 @@ body {
   width: 100%;
 }
 
+/* 樱花飘落画布：铺在 hero 背景之上、内容之下 */
+.sakura-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
