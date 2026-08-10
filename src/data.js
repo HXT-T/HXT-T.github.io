@@ -9,6 +9,85 @@ export const site = {
   githubUrl: 'https://github.com/hxt-t',
 }
 
+// 首页 —— Rose Index / 樱色刊物
+// 这里保存首页专用内容，不影响博客、瞬间、书架与旅行页的数据结构。
+export const home = {
+  issue: 'ISSUE 01',
+  issueDate: 'AUGUST 2026',
+  kicker: 'PERSONAL INTERNET · BUILT IN PUBLIC',
+  wordmark: ['YUYU', 'YUU'],
+  manifesto: '我在这里写作、做东西，也记录那些尚未长成答案的念头。',
+  roles: ['BUILDING AI COMPANIONS', 'WRITING', 'GARDENING'],
+  location: 'SOMEWHERE ON THE INTERNET · 2026',
+  cover: {
+    src: '/hero-bg.jpg',
+    alt: '樱花树下停着一辆白色汽车的春日照片',
+    index: 'ARCHIVE 01',
+    caption: 'BLOOM STUDY · SPRING LIGHT',
+  },
+  works: [
+    {
+      index: '01',
+      title: 'KimiPet',
+      description: '把对话、记忆、专注与提醒，收进一只常驻桌面的 AI 宠物。',
+      discipline: 'AI COMPANION · DESKTOP',
+      stack: 'PYTHON / PYSIDE6',
+      status: 'BUILDING',
+      visual: {
+        type: 'image',
+        src: '/work/kimipet-contact-sheet.png',
+        alt: 'KimiPet 在真实 Windows 桌面中的六格运行画面',
+      },
+    },
+    {
+      index: '02',
+      title: 'Second Brain',
+      description: '为个人知识库设计安全审计、迁移、收集与周期整理流程。',
+      discipline: 'KNOWLEDGE SYSTEM · TOOLING',
+      stack: 'OBSIDIAN / AUTOMATION',
+      status: 'IN USE',
+      visual: {
+        type: 'network',
+        alt: '由笔记节点与连接线组成的第二大脑关系示意',
+      },
+    },
+    {
+      index: '03',
+      title: 'Personal Internet',
+      description: '把作品、写作、阅读与片刻，重新编成一份长期生长的个人刊物。',
+      discipline: 'EDITORIAL WEB · DIGITAL GARDEN',
+      stack: 'REACT / VITE / MARKDOWN',
+      status: 'TENDING',
+      visual: {
+        type: 'publication',
+        alt: 'Personal Internet 第一期的编辑式封面图形',
+      },
+    },
+  ],
+  now: [
+    {
+      label: 'BUILDING',
+      title: 'KimiPet 与这座网站',
+      text: '一边打磨桌面陪伴，一边整理属于自己的长期互联网。',
+    },
+    {
+      label: 'READING',
+      title: '《悉达多》与《重构》',
+      text: '一本谈智慧，一本谈如何把复杂慢慢整理清楚。',
+    },
+    {
+      label: 'THINKING',
+      title: '技术如何不打扰人',
+      text: '好的工具应该在需要时出现，其余时间退回背景。',
+    },
+    {
+      label: 'TENDING',
+      title: '个人互联网与第二大脑',
+      text: '持续整理、连接，也允许一些念头暂时没有结论。',
+    },
+  ],
+}
+
 // 首页顶部的分类导航；href 可覆盖默认跳转（默认跳博客对应分类）
 export const categories = [
   { name: '哲学思考' },
