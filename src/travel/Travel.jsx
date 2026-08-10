@@ -1,18 +1,6 @@
-import { site, travel, footer } from '../data.js'
-
-function TopBar() {
-  return (
-    <header className="t-nav">
-      <a className="t-back" href="/">
-        ← 回到首页
-      </a>
-      <a className="t-brand" href="/">
-        <img src="/logo.jpg" alt="猫咪 logo" />
-        <span>{site.nickname}</span>
-      </a>
-    </header>
-  )
-}
+import SubNav from '../components/SubNav.jsx'
+import SubFooter from '../components/SubFooter.jsx'
+import { travel } from '../data.js'
 
 function Hero() {
   return (
@@ -73,28 +61,14 @@ function Wishlist() {
   )
 }
 
-function Footer() {
-  return (
-    <footer className="t-footer">
-      <p>
-        {footer.copyright} · <a href="/">首页</a>
-        {' · '}
-        <a href={site.githubUrl} target="_blank" rel="noreferrer">
-          GitHub
-        </a>
-      </p>
-    </footer>
-  )
-}
-
 export default function Travel() {
   return (
     <>
-      <TopBar />
+      <SubNav current="/travel" />
       <Hero />
       <Trips />
       <Wishlist />
-      <Footer />
+      <SubFooter />
     </>
   )
 }

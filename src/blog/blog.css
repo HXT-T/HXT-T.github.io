@@ -43,7 +43,7 @@
 }
 
 .b-search input::placeholder {
-  color: #cfa6b8;
+  color: #8d6274;
 }
 
 .b-chips {
@@ -398,6 +398,8 @@
   }
 
   .b-grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: 20px;
     padding-bottom: 64px;
   }
 

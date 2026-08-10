@@ -4,14 +4,14 @@
    ============================================ */
 :root {
   --color-bg: #fff7fa;
-  --color-text: #432c37;
-  --color-muted: #93707f;
+  --color-text: #3f2934;
+  --color-muted: #765563;
 
-  --rose: #e64980;
-  --pink: #f783ac;
+  --rose: #c2255c;
+  --pink: #d6336c;
   --pink-light: #faa2c1;
   --blush: #ffd6e7;
-  --lavender: #b197fc;
+  --lavender: #7657c9;
   --lilac: #e5dbff;
   --sky: #91a7ff;
 
@@ -44,6 +44,14 @@ body {
   color: var(--color-text);
   line-height: 1.7;
   overflow-x: hidden;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid rgba(118, 87, 201, 0.72);
+  outline-offset: 3px;
 }
 
 /* 页脚自然贴底 */
@@ -116,6 +124,12 @@ body {
 .p-link:hover {
   color: var(--rose);
   background: rgba(230, 73, 128, 0.08);
+}
+
+.p-link[aria-current='page'] {
+  color: var(--rose);
+  background: rgba(194, 37, 92, 0.1);
+  font-weight: 700;
 }
 
 .p-brand {
@@ -227,8 +241,17 @@ body {
   }
 
   .p-back {
-    padding: 6px 14px;
+    padding: 6px 10px;
     font-size: 0.85rem;
+  }
+
+  .p-links {
+    gap: 0;
+  }
+
+  .p-link {
+    padding: 6px 9px;
+    font-size: 0.84rem;
   }
 
   .p-brand span {
@@ -237,6 +260,16 @@ body {
 
   .p-hero {
     padding: 130px 20px 32px;
+  }
+}
+
+@media (max-width: 360px) {
+  .p-nav {
+    padding-inline: 10px;
+  }
+
+  .p-brand {
+    display: none;
   }
 }
 

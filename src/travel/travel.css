@@ -4,13 +4,13 @@
    ============================================ */
 :root {
   --color-bg: #fff7fa;
-  --color-text: #432c37;
-  --color-muted: #93707f;
+  --color-text: #3f2934;
+  --color-muted: #765563;
 
-  --rose: #e64980;
-  --pink: #f783ac;
+  --rose: #c2255c;
+  --pink: #d6336c;
   --blush: #ffd6e7;
-  --lavender: #b197fc;
+  --lavender: #7657c9;
   --sky: #91a7ff;
 
   --gradient-primary: linear-gradient(120deg, var(--rose), var(--pink) 55%, var(--lavender));
@@ -41,6 +41,13 @@ body {
   color: var(--color-text);
   line-height: 1.7;
   overflow-x: hidden;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid rgba(118, 87, 201, 0.82);
+  outline-offset: 3px;
 }
 
 /* ============================================
@@ -199,6 +206,7 @@ body {
    内容区块
    ============================================ */
 .t-section {
+  width: 100%;
   max-width: 1080px;
   margin: 0 auto;
   padding: 88px 24px 24px;
