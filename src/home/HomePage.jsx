@@ -1,26 +1,11 @@
+import ProjectCard from '../components/ProjectCard.jsx'
+import SectionHeading from '../components/SectionHeading.jsx'
 import { categories, home, site, subPages } from '../data.js'
+import { projects } from '../data/projects.js'
 import { posts } from '../blog/posts.js'
 
 function formatDate(date) {
   return date ? date.replaceAll('-', '.') : ''
-}
-
-function SectionHeading({ index, eyebrow, title, description, action }) {
-  return (
-    <header className="section-heading">
-      <span className="section-index" aria-hidden="true">
-        {index}
-      </span>
-      <div className="section-title-group">
-        <p className="section-eyebrow">{eyebrow}</p>
-        <h2>{title}</h2>
-      </div>
-      <div className="section-intro">
-        <p>{description}</p>
-        {action}
-      </div>
-    </header>
-  )
 }
 
 function Cover() {
@@ -45,18 +30,24 @@ function Cover() {
         <div className="cover-bottom">
           <div>
             <p className="cover-manifesto">{home.manifesto}</p>
-            <div className="cover-actions" aria-label="首页推荐入口">
-              {latestPost && (
-                <a className="text-link text-link-primary" href={`/blog?post=${latestPost.slug}`}>
-                  读最近一篇文章 <span aria-hidden="true">→</span>
-                </a>
-              )}
-              <a className="text-link" href="#work">
-                查看精选作品 <span aria-hidden="true">↓</span>
+            <div className="cover-current">
+              <span>CURRENTLY BUILDING</span>
+              <a href={home.currentProject.href}>
+                {home.currentProject.name} <span aria-hidden="true">→</span>
               </a>
             </div>
+            <div className="cover-actions" aria-label="首页推荐入口">
+              <a className="text-link text-link-primary" href="/projects">
+                进入 Product Lab <span aria-hidden="true">→</span>
+              </a>
+              {latestPost && (
+                <a className="text-link" href={`/blog?post=${latestPost.slug}`}>
+                  读最近一篇文章 <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
           </div>
-          <div className="cover-identity" aria-label="身份与所在地">
+          <div className="cover-identity" aria-label="正在做的事情">
             {home.roles.map((role) => (
               <span key={role}>{role}</span>
             ))}
@@ -90,82 +81,89 @@ function Cover() {
   )
 }
 
-function WorkPreview({ work }) {
-  if (work.visual.type === 'network') {
-    return (
-      <div className="work-preview work-preview-network" role="img" aria-label={work.visual.alt}>
-        <span className="network-node network-node-main">SECOND<br />BRAIN</span>
-        <span className="network-node network-node-a">NOTES</span>
-        <span className="network-node network-node-b">BOOKS</span>
-        <span className="network-node network-node-c">IDEAS</span>
-        <span className="network-line network-line-a" aria-hidden="true" />
-        <span className="network-line network-line-b" aria-hidden="true" />
-        <span className="network-line network-line-c" aria-hidden="true" />
-      </div>
+function BuildingSection() {
+  const buildingProjects = projects
+    .filter(
+      (project) =>
+        !project.archived &&
+        project.type !== 'experiment' &&
+        project.status !== 'live',
     )
-  }
-
-  if (work.visual.type === 'publication') {
-    return (
-      <div className="work-preview work-preview-publication" role="img" aria-label={work.visual.alt}>
-        <small>PERSONAL INTERNET</small>
-        <strong>ISSUE<br />01</strong>
-        <span>2026 / KEEP TENDING</span>
-      </div>
-    )
-  }
+    .sort((a, b) => (b.activityRank ?? 0) - (a.activityRank ?? 0))
+    .slice(0, 3)
 
   return (
-    <div className={`work-preview work-preview-${work.title.toLowerCase()}`}>
-      <img src={work.visual.src} alt={work.visual.alt} loading="lazy" />
-    </div>
-  )
-}
-
-function SelectedWorks() {
-  return (
-    <section className="editorial-section works-section" id="work">
+    <section className="editorial-section building-section" id="building">
       <SectionHeading
         index="01"
-        eyebrow="SELECTED WORKS"
-        title="正在做的东西"
-        description="不是一张技能清单，而是三件仍在生长的作品：陪伴、知识与更安静的技术。"
+        eyebrow="THINGS I’M BUILDING"
+        title="正在获得形状的东西"
+        description="产品不是履历上的一行文字。它们从问题、草图与反复试验里，慢慢长成可以被体验的东西。"
         action={(
-          <a className="text-link" href={site.githubUrl} target="_blank" rel="noreferrer">
-            查看 GitHub <span aria-hidden="true">↗</span>
+          <a className="text-link" href="/projects">
+            查看全部项目 <span aria-hidden="true">→</span>
           </a>
         )}
       />
 
-      <div className="work-list">
-        {home.works.map((work) => (
-          <article className="work-row" key={work.index}>
-            <span className="work-index">{work.index}</span>
-            <div className="work-name">
-              <h3>{work.title}</h3>
-              <p>{work.description}</p>
-            </div>
-            <div className="work-meta">
-              <span>{work.discipline}</span>
-              <span>{work.stack}</span>
-            </div>
-            <span className="work-status">{work.status}</span>
-            <WorkPreview work={work} />
-          </article>
+      <div className="home-project-grid">
+        {buildingProjects.map((project) => (
+          <div
+            className={`home-project-grid__item${project.featured ? ' home-project-grid__item--featured' : ''}`}
+            key={project.id}
+          >
+            <ProjectCard
+              project={project}
+              variant={project.featured ? 'featured' : 'normal'}
+            />
+          </div>
         ))}
       </div>
     </section>
   )
 }
 
-function RecentThoughts() {
+function ExperimentsSection() {
+  const experiments = projects
+    .filter((project) => project.type === 'experiment' && !project.archived)
+    .sort((a, b) => (b.activityRank ?? 0) - (a.activityRank ?? 0))
+
+  return (
+    <section className="editorial-section experiments-section" id="experiments">
+      <SectionHeading
+        index="02"
+        eyebrow="EXPERIMENTS / PLAYGROUND"
+        title="小东西，怪想法，原型"
+        description="不要求每个念头都成为正式产品。做出来、放上网、记在这里，就已经足够。"
+        action={(
+          <a className="text-link" href="/projects">
+            打开实验索引 <span aria-hidden="true">→</span>
+          </a>
+        )}
+      />
+
+      <div className="experiment-list">
+        {experiments.map((project, index) => (
+          <div className="experiment-list__item" key={project.id}>
+            <span className="experiment-list__index" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <ProjectCard project={project} variant="compact" />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function LatestWriting() {
   const recentPosts = posts.slice(0, 3)
 
   return (
-    <section className="editorial-section thoughts-section" id="thoughts">
+    <section className="editorial-section thoughts-section" id="writing">
       <SectionHeading
-        index="02"
-        eyebrow="RECENT THOUGHTS"
+        index="03"
+        eyebrow="LATEST WRITING"
         title="最近写下的想法"
         description="完整文章、读书札记与技术笔记，共同记录一个想法如何慢慢变清楚。"
         action={(
@@ -213,7 +211,7 @@ function NowSection() {
   return (
     <section className="editorial-section now-section" id="now">
       <SectionHeading
-        index="03"
+        index="04"
         eyebrow="NOW / AUGUST 2026"
         title="此刻正在发生"
         description="一张会不断改写的状态页：正在做、正在读、正在想，也正在耐心照料。"
@@ -240,7 +238,7 @@ function NowSection() {
   )
 }
 
-function GardenIndex() {
+function PersonalIndex() {
   const topicCounts = posts.reduce((counts, post) => {
     counts[post.category] = (counts[post.category] || 0) + 1
     return counts
@@ -248,14 +246,17 @@ function GardenIndex() {
   const activeTopics = categories.filter(
     (category) => !category.href && topicCounts[category.name],
   )
+  const personalPages = subPages.filter((page) =>
+    ['/books', '/moments', '/travel'].includes(page.href),
+  )
 
   return (
     <section className="editorial-section garden-section" id="garden">
       <SectionHeading
-        index="04"
-        eyebrow="GARDEN INDEX"
-        title="反复回到的主题"
-        description="它们不是固定栏目，而是一组会彼此引用、修订并缓慢生长的关系。"
+        index="05"
+        eyebrow="PERSONAL INDEX / GARDEN"
+        title="产品之外，生活仍在继续"
+        description="读过的书、路过的地方、短暂发光的瞬间，以及那些会被反复写下的主题。"
       />
 
       <div className="garden-layout">
@@ -275,9 +276,9 @@ function GardenIndex() {
         </div>
 
         <aside className="garden-aside">
-          <p className="garden-statement">知识不是文件夹。它更像一条河，在不同时间经过同一个人。</p>
-          <div className="garden-paths" aria-label="更多内容入口">
-            {subPages.map((page, index) => (
+          <p className="garden-statement">个人互联网不只收纳成果，也收纳一个人如何生活、阅读与改变。</p>
+          <div className="garden-paths" aria-label="个人内容入口">
+            {personalPages.map((page, index) => (
               <a href={page.href} key={page.href}>
                 <span>0{index + 1}</span>
                 <strong>{page.name}</strong>
@@ -295,10 +296,11 @@ export default function HomePage() {
   return (
     <main id="main-content" tabIndex="-1">
       <Cover />
-      <SelectedWorks />
-      <RecentThoughts />
+      <BuildingSection />
+      <ExperimentsSection />
+      <LatestWriting />
       <NowSection />
-      <GardenIndex />
+      <PersonalIndex />
     </main>
   )
 }

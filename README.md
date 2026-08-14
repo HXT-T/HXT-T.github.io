@@ -17,7 +17,8 @@ npm run dev    # http://localhost:5173
 
 | 路径 | 入口 html | 页面组件 | 内容来源 |
 | --- | --- | --- | --- |
-| `/` | `index.html` | `src/App.jsx` | `src/data.js` |
+| `/` | `index.html` | `src/App.jsx` | `src/data.js` + `src/data/projects.js` |
+| `/projects` | `projects.html` | `src/projects/Projects.jsx` | `src/data/projects.js` |
 | `/travel` | `travel.html` | `src/travel/Travel.jsx` | `src/data.js` |
 | `/blog` | `blog.html` | `src/blog/Blog.jsx` | `src/posts/*.md` |
 | `/moments` | `moments.html` | `src/moments/Moments.jsx` | `src/data.js` |
@@ -28,6 +29,16 @@ npm run dev    # http://localhost:5173
 ## 修改内容
 
 站点文案（昵称、头衔、标签、名言库、旅行足迹、瞬间、书架）集中在 `src/data.js`。
+
+## 添加项目 / Demo
+
+产品代码保持在独立仓库，主站只负责展示与链接。新增项目时：
+
+1. 在 `src/data/projects.js` 增加一条项目数据。
+2. 如果已有真实截图，放进 `public/work/` 并填写 `image`；没有截图可先留空。
+3. 独立 Demo 部署成功后填写 `demoUrl`，并将 `demoAvailable` 改为 `true`。
+
+`activityRank` 控制当前活跃项目的展示顺序。未开放的 Demo 即使保留了预定 URL，也不会渲染成可点击链接。
 
 ## 写博客
 

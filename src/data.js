@@ -14,56 +14,21 @@ export const site = {
 export const home = {
   issue: 'ISSUE 01',
   issueDate: 'AUGUST 2026',
-  kicker: 'PERSONAL INTERNET · BUILT IN PUBLIC',
+  kicker: 'PERSONAL INTERNET · PRODUCT LAB',
   wordmark: ['YUYU', 'YUU'],
-  manifesto: '我在这里写作、做东西，也记录那些尚未长成答案的念头。',
-  roles: ['BUILDING AI COMPANIONS', 'WRITING', 'GARDENING'],
+  manifesto: '我在这里做想存在的东西，也写下它们长成之前的念头。',
+  roles: ['BUILDING PRODUCTS', 'RUNNING EXPERIMENTS', 'WRITING'],
   location: 'SOMEWHERE ON THE INTERNET · 2026',
+  currentProject: {
+    name: 'AI Idol Trainer',
+    href: '/projects#ai-idol',
+  },
   cover: {
     src: '/hero-bg.jpg',
     alt: '樱花树下停着一辆白色汽车的春日照片',
     index: 'ARCHIVE 01',
     caption: 'BLOOM STUDY · SPRING LIGHT',
   },
-  works: [
-    {
-      index: '01',
-      title: 'KimiPet',
-      description: '把对话、记忆、专注与提醒，收进一只常驻桌面的 AI 宠物。',
-      discipline: 'AI COMPANION · DESKTOP',
-      stack: 'PYTHON / PYSIDE6',
-      status: 'BUILDING',
-      visual: {
-        type: 'image',
-        src: '/work/kimipet-contact-sheet.png',
-        alt: 'KimiPet 在真实 Windows 桌面中的六格运行画面',
-      },
-    },
-    {
-      index: '02',
-      title: 'Second Brain',
-      description: '为个人知识库设计安全审计、迁移、收集与周期整理流程。',
-      discipline: 'KNOWLEDGE SYSTEM · TOOLING',
-      stack: 'OBSIDIAN / AUTOMATION',
-      status: 'IN USE',
-      visual: {
-        type: 'network',
-        alt: '由笔记节点与连接线组成的第二大脑关系示意',
-      },
-    },
-    {
-      index: '03',
-      title: 'Personal Internet',
-      description: '把作品、写作、阅读与片刻，重新编成一份长期生长的个人刊物。',
-      discipline: 'EDITORIAL WEB · DIGITAL GARDEN',
-      stack: 'REACT / VITE / MARKDOWN',
-      status: 'TENDING',
-      visual: {
-        type: 'publication',
-        alt: 'Personal Internet 第一期的编辑式封面图形',
-      },
-    },
-  ],
   now: [
     {
       label: 'BUILDING',
@@ -173,6 +138,7 @@ export const navExtras = [
 
 // 子页面顶栏的互跳链接
 export const subPages = [
+  { name: '项目', href: '/projects' },
   { name: '博客', href: '/blog' },
   { name: '瞬间', href: '/moments' },
   { name: '书架', href: '/books' },
