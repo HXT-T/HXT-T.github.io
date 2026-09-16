@@ -210,6 +210,7 @@ export function SiteFooter({ index = '07 / COLOPHON' }) {
         <a href="/moments">Moments</a>
         <a href="/books">Books</a>
         <a href="/travel">Travel</a>
+        <a href="/wardrobe">Wardrobe</a>
         <a href={site.githubUrl} target="_blank" rel="noreferrer">
           GitHub ↗
         </a>
