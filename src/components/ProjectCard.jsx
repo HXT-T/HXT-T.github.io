@@ -91,6 +91,13 @@ export default function ProjectCard({ project, variant }) {
         <h3 className="project-card__title" id={titleId}>{project.name}</h3>
         <p className="project-card__description">{project.description}</p>
 
+        {project.stage === 'mvp' && (project.mvpGoal || project.nextStep) && (
+          <dl className="project-card__mvp">
+            {project.mvpGoal && <div><dt>MVP 目标</dt><dd>{project.mvpGoal}</dd></div>}
+            {project.nextStep && <div><dt>下一步</dt><dd>{project.nextStep}</dd></div>}
+          </dl>
+        )}
+
         {project.tags?.length > 0 && (
           <ul className="project-card__tags" aria-label="项目关键词">
             {project.tags.map((tag) => <li key={tag}>{tag}</li>)}

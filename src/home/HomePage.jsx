@@ -1,7 +1,7 @@
 import ProjectCard from '../components/ProjectCard.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import { categories, home, site, subPages } from '../data.js'
-import { projects } from '../data/projects.js'
+import { projects, isBuildingMvp, sortProjects } from '../data/projects.js'
 import { posts } from '../blog/posts.js'
 
 function formatDate(date) {
@@ -37,8 +37,8 @@ function Cover() {
               </a>
             </div>
             <div className="cover-actions" aria-label="首页推荐入口">
-              <a className="text-link text-link-primary" href="/projects">
-                进入 Product Lab <span aria-hidden="true">→</span>
+              <a className="text-link text-link-primary" href="/projects?view=mvp">
+                进入 MVP 工作台 <span aria-hidden="true">→</span>
               </a>
               {latestPost && (
                 <a className="text-link" href={`/blog?post=${latestPost.slug}`}>
@@ -82,26 +82,18 @@ function Cover() {
 }
 
 function BuildingSection() {
-  const buildingProjects = projects
-    .filter(
-      (project) =>
-        !project.archived &&
-        project.type !== 'experiment' &&
-        project.status !== 'live',
-    )
-    .sort((a, b) => (b.activityRank ?? 0) - (a.activityRank ?? 0))
-    .slice(0, 3)
+  const buildingProjects = sortProjects(projects.filter(isBuildingMvp)).slice(0, 3)
 
   return (
     <section className="editorial-section building-section" id="building">
       <SectionHeading
         index="01"
-        eyebrow="THINGS I’M BUILDING"
-        title="正在获得形状的东西"
-        description="产品不是履历上的一行文字。它们从问题、草图与反复试验里，慢慢长成可以被体验的东西。"
+        eyebrow="MVP WORKBENCH / CURRENTLY BUILDING"
+        title="正在构建的 MVP"
+        description="这里放正在动手做的最小可用版本。从一个明确的问题开始，逐步做出可以体验的产品。"
         action={(
-          <a className="text-link" href="/projects">
-            查看全部项目 <span aria-hidden="true">→</span>
+          <a className="text-link" href="/projects?view=mvp">
+            打开 MVP 工作台 <span aria-hidden="true">→</span>
           </a>
         )}
       />
@@ -136,7 +128,7 @@ function ExperimentsSection() {
         title="小东西，怪想法，原型"
         description="不要求每个念头都成为正式产品。做出来、放上网、记在这里，就已经足够。"
         action={(
-          <a className="text-link" href="/projects">
+          <a className="text-link" href="/projects?view=experiments">
             打开实验索引 <span aria-hidden="true">→</span>
           </a>
         )}

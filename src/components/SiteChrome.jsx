@@ -3,7 +3,7 @@ import { about, footer, home, site } from '../data.js'
 
 const navigation = [
   { id: 'home', name: 'Home', href: '/' },
-  { id: 'projects', name: 'Projects', href: '/projects', priority: true },
+  { id: 'projects', name: 'Product Lab', href: '/projects', priority: true },
   { id: 'writing', name: 'Writing', href: '/blog' },
   { id: 'books', name: 'Books', href: '/books' },
   { id: 'moments', name: 'Moments', href: '/moments' },

@@ -32,6 +32,22 @@ npm run dev    # http://localhost:5173
 
 ## 添加项目 / Demo
 
+### 页面分工
+
+- 首页：个人介绍、重点 MVP、实验摘要、最近文章与生活入口。
+- Product Lab `/projects`：全部作品的目录。
+- MVP 工作台 `/projects?view=mvp`：正在构建的最小可用版本。
+- 已上线、实验、构想、归档：通过 `?view=live|experiments|concepts|archived` 直接访问。
+- Writing：长文与笔记；Books：阅读；Moments：短记；Travel：旅行记录；About：个人介绍。
+
+### 将项目放入 MVP 工作台
+
+在项目数据中设置 `stage: 'mvp'`、`status: 'building'`、`archived: false`。
+填写 `mvpGoal`（核心目标），按实际进展填写 `nextStep` 和 `updatedAt`。
+首页自动展示优先级最高的三个 MVP，工作台展示全部 MVP。
+上线后将 `status` 改为 `live`，确认 Demo 可访问后启用 `demoAvailable`。
+项目会自动离开正在构建区，进入已上线视图。
+
 产品代码保持在独立仓库，主站只负责展示与链接。新增项目时：
 
 1. 在 `src/data/projects.js` 增加一条项目数据。

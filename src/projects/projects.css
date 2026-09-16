@@ -2,6 +2,16 @@
   min-width: 0;
 }
 
+.project-card__mvp {
+  margin: 24px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.project-card__mvp div + div { margin-top: 14px; }
+.project-card__mvp dt { color: var(--rose); font-family: var(--font-mono); font-size: 0.68rem; }
+.project-card__mvp dd { margin: 6px 0 0; font-size: 0.85rem; line-height: 1.8; }
+
 .projects-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.5fr);
