@@ -143,6 +143,7 @@ export const subPages = [
   { name: '瞬间', href: '/moments' },
   { name: '书架', href: '/books' },
   { name: '旅行', href: '/travel' },
+  { name: '衣橱', href: '/wardrobe' },
 ]
 
 // 博客页文案；文章本身在 src/posts/ 里，用 Markdown 写
@@ -223,4 +224,11 @@ export const booksPage = {
       note: '想看看数学、艺术与音乐如何在「怪圈」里相遇。',
     },
   ],
+}
+
+// 「电子衣橱」页 —— 只有文案；衣服数据存在访客自己的浏览器里（IndexedDB）
+export const wardrobePage = {
+  badge: 'WARDROBE · 衣橱',
+  title: '今天穿什么',
+  sub: '把衣服登记一次，以后交给它替你决定',
 }

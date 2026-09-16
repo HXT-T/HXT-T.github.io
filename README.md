@@ -23,6 +23,7 @@ npm run dev    # http://localhost:5173
 | `/blog` | `blog.html` | `src/blog/Blog.jsx` | `src/posts/*.md` |
 | `/moments` | `moments.html` | `src/moments/Moments.jsx` | `src/data.js` |
 | `/books` | `books.html` | `src/books/Books.jsx` | `src/data.js` |
+| `/wardrobe` | `wardrobe.html` | `src/wardrobe/Wardrobe.jsx` | 访客浏览器里的 IndexedDB |
 
 多页入口见 `vite.config.js`。子页面共享顶栏/页脚（`src/components/`）与骨架样式（`src/pages.css`），各页面的专属样式在同目录 css 里。
 
@@ -58,6 +59,24 @@ excerpt: 一句话摘要
 - 文件名即文章的 slug，例如 `hello.md` → `/blog?post=hello`
 - `category` 建议与 `src/data.js` 里 `categories` 的名称保持一致，列表页才能按分类筛选
 - 构建时自动收录，无需注册
+
+## 电子衣橱 `/wardrobe`
+
+登记衣服 → 填气温、场合、天气 → 生成一套今天能穿出门的搭配，并解释为什么这么搭。
+
+数据全部留在访客自己的浏览器里（IndexedDB，没有后端也不上传）：单品和收藏的搭配存
+IndexedDB，照片压到长边 720px 的 JPEG 一起存进去；气温/场合/天气这几个默认值存
+localStorage。换设备或清缓存前用页面底部的「导出备份」存一份 JSON。
+
+| 文件 | 作用 |
+| --- | --- |
+| `src/wardrobe/model.js` | 类别、颜色、季节、场合等常量；气温 → 季节/保暖度的换算 |
+| `src/wardrobe/outfit.js` | 搭配引擎：随机采样 + 打分（保暖度、季节、场合、配色、最近穿过），并把分数翻译成推荐理由 |
+| `src/wardrobe/storage.js` | IndexedDB 读写；浏览器禁用时退回内存 |
+| `src/wardrobe/image.js` | 照片压缩 |
+| `src/wardrobe/sample.js` | 空衣橱时可一键导入的示例单品 |
+
+调搭配口味改 `outfit.js` 里的打分权重；加类别或颜色改 `model.js` 的常量表即可。
 
 ## 部署
 
