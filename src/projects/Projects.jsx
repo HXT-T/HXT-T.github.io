@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import ProjectCard from '../components/ProjectCard.jsx'
+import PageMasthead from '../components/PageMasthead.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import SiteFrame from '../components/SiteChrome.jsx'
 import { projects, projectViews, matchesProjectView, sortProjects } from '../data/projects.js'
@@ -10,31 +11,33 @@ function readView() {
 }
 
 function ProjectsHero({ view }) {
-  return (
-    <section className="projects-hero" aria-labelledby="projects-title">
-      <div className="projects-hero__copy">
-        <div className="projects-hero__meta">
-          <span>{view === 'mvp' ? 'PRODUCT LAB / MVP WORKBENCH' : 'PRODUCT LAB / INDEX'}</span>
-          <span>ACTIVE + UNFINISHED</span>
-        </div>
-        <h1 id="projects-title">
-          <span>{view === 'mvp' ? 'MVP' : 'Things I'}</span>
-          <span>{view === 'mvp' ? 'Lab.' : 'build.'}</span>
-        </h1>
-        <p>
-          {view === 'mvp' ? '正在构建的最小可用版本。把核心目标、当前状态和可以体验的入口放在一起。' : '产品、工具与短期实验。从构想到 MVP，再到上线，记录每件作品所处的阶段。'}
-        </p>
-      </div>
+  const isMvp = view === 'mvp'
 
-      <aside className="projects-hero__note" aria-label="当前构建状态">
-        <span className="projects-hero__note-index">FIELD NOTE / 01</span>
-        <p>Building things I want to exist.</p>
-        <a className="text-link" href="/projects?view=mvp">
-          MVP 工作台 <span aria-hidden="true">→</span>
-        </a>
-        <small>查看正在做的产品，以及它们迈向第一个可用版本的过程。</small>
-      </aside>
-    </section>
+  return (
+    <PageMasthead
+      page="projects"
+      eyebrow={isMvp ? 'PRODUCT LAB / MVP WORKBENCH' : 'PRODUCT LAB / INDEX'}
+      title={isMvp ? ['MVP', 'Lab.'] : ['Things I', 'build.']}
+      description={
+        isMvp
+          ? '正在构建的最小可用版本。把核心目标、当前状态和可以体验的入口放在一起。'
+          : '产品、工具与短期实验。从构想到 MVP，再到上线，记录每件作品所处的阶段。'
+      }
+      aside={(
+        <>
+          <span className="page-masthead__aside-index">FIELD NOTE / 01</span>
+          <p>Building things I want to exist.</p>
+          {isMvp ? (
+            <small>每个 MVP 只回答一个问题：它要为谁解决什么，下一步做什么。</small>
+          ) : (
+            <a className="text-link" href="/projects?view=mvp">
+              MVP 工作台 <span aria-hidden="true">→</span>
+            </a>
+          )}
+          {!isMvp && <small>查看正在做的产品，以及它们迈向第一个可用版本的过程。</small>}
+        </>
+      )}
+    />
   )
 }
 
@@ -64,14 +67,13 @@ export default function Projects() {
   )
 
   return (
-    <SiteFrame current="projects" footerIndex="02 / COLOPHON">
-      <main className="projects-page" id="main-content" tabIndex="-1">
+    <SiteFrame current="projects">
+      <main className="projects-page page-main" id="main-content" tabIndex="-1">
         <ProjectsHero view={activeFilter} />
 
         <section className="projects-index editorial-section" aria-labelledby="project-index-title">
           <SectionHeading
             id="project-index-title"
-            index="01"
             eyebrow="PROJECT INDEX"
             title={currentView.label}
             description={currentView.description}

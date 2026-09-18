@@ -1,79 +1,58 @@
 /* ============================================
    「瞬间」页样式 —— 竖向时间线
-   共享骨架（顶栏/页头/页脚）在 ../pages.css
+   共享骨架（配色变量 / 顶栏 / 页头 / 页脚）在 ../index.css
+   版式与首页的「最近写下的想法」同源：编号 + 细线，不用卡片
    ============================================ */
 .m-timeline {
-  position: relative;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 16px 24px 88px 40px;
-}
-
-/* 贯穿的渐变竖线 */
-.m-timeline::before {
-  content: '';
-  position: absolute;
-  left: 19px;
-  top: 24px;
-  bottom: 88px;
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(
-    to bottom,
-    rgba(230, 73, 128, 0.35),
-    rgba(177, 151, 252, 0.3)
-  );
+  padding: 0 clamp(22px, 5vw, 80px) clamp(72px, 8vw, 116px);
 }
 
 .m-item {
   position: relative;
-  margin-bottom: 28px;
-  animation: p-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 44px);
+  align-items: baseline;
+  padding: clamp(26px, 3vw, 38px) 0;
+  border-bottom: 1px solid var(--line);
 }
 
-/* 时间线上的圆点，压在竖线上 */
+.m-item:first-child {
+  border-top: 1px solid var(--line);
+}
+
+/* 每条左侧的小圆点，标出时间线 */
 .m-item::before {
   content: '';
   position: absolute;
-  left: -27px;
-  top: 6px;
-  width: 12px;
-  height: 12px;
+  top: calc(clamp(26px, 3vw, 38px) + 8px);
+  left: -13px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: var(--gradient-primary);
-  box-shadow: 0 0 0 4px rgba(255, 214, 231, 0.6);
+  background: var(--rose);
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out);
 }
 
-/* 入场依次延迟，形成瀑布感 */
-.m-item:nth-child(1) { animation-delay: 0.35s; }
-.m-item:nth-child(2) { animation-delay: 0.45s; }
-.m-item:nth-child(3) { animation-delay: 0.55s; }
-.m-item:nth-child(4) { animation-delay: 0.65s; }
-.m-item:nth-child(5) { animation-delay: 0.75s; }
-.m-item:nth-child(n + 6) { animation-delay: 0.85s; }
+.m-item:hover::before {
+  opacity: 1;
+}
 
 .m-date {
-  display: inline-block;
-  margin-bottom: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--pink);
+  color: var(--rose);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
 }
 
 .m-card {
-  padding: 20px 24px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: var(--shadow-soft);
-  font-size: 1rem;
-  line-height: 1.8;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.m-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 24px 48px rgba(230, 73, 128, 0.18);
+  max-width: 64ch;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.6vw, 1.42rem);
+  line-height: 1.75;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
 }
 
 /* ============================================
@@ -81,21 +60,16 @@
    ============================================ */
 @media (max-width: 640px) {
   .m-timeline {
-    padding-left: 34px;
-    padding-bottom: 64px;
+    padding-inline: 18px;
+    padding-bottom: 72px;
   }
 
-  .m-timeline::before {
-    left: 13px;
+  .m-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
   }
 
   .m-item::before {
-    left: -27px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .m-item {
-    animation: none;
+    left: -10px;
   }
 }

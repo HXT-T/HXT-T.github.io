@@ -1,191 +1,205 @@
 /* ============================================
    博客页样式 —— 卡片列表 + 文章排版
-   共享骨架（顶栏/页头/页脚）在 ../pages.css
+   共享骨架（配色变量 / 顶栏 / 页头 / 页脚）在 ../index.css
+   版式与首页同源：满幅、细线分隔、方角，不用阴影与渐变
    ============================================ */
 
 /* 控制区：搜索 + 分类筛选 */
 .b-controls {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 8px 24px 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr) auto;
+  gap: clamp(18px, 3vw, 40px);
   align-items: center;
-  gap: 16px;
+  padding: 22px clamp(22px, 5vw, 80px);
+  border-bottom: 1px solid var(--line);
 }
 
 .b-search {
-  width: min(560px, 100%);
   display: flex;
   align-items: center;
-  padding: 6px 6px 6px 20px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(230, 73, 128, 0.14);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-soft);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 200ms var(--ease-out);
 }
 
 .b-search:focus-within {
-  border-color: rgba(230, 73, 128, 0.45);
-  box-shadow: 0 24px 64px rgba(230, 73, 128, 0.22);
+  border-color: var(--rose);
 }
 
 .b-search input {
   flex: 1;
   min-width: 0;
+  min-height: 44px;
+  padding: 0;
   border: none;
   outline: none;
   background: transparent;
   font-family: inherit;
-  font-size: 1rem;
-  color: var(--color-text);
+  font-size: 0.92rem;
+  color: var(--ink);
 }
 
 .b-search input::placeholder {
-  color: #8d6274;
+  color: var(--muted);
 }
 
 .b-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
+  gap: 6px clamp(14px, 2vw, 26px);
 }
 
 .b-chip {
-  padding: 6px 18px;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(230, 73, 128, 0.18);
-  background: #fff;
-  color: var(--color-muted);
+  position: relative;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
   font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-}
-
-.b-chip:hover {
-  color: var(--rose);
-  transform: translateY(-1px);
-}
-
-.b-chip.active {
-  background: var(--gradient-primary);
-  border-color: transparent;
-  color: #fff;
+  font-size: 0.82rem;
   font-weight: 600;
-  box-shadow: var(--shadow-btn);
+  line-height: 44px;
+  cursor: pointer;
+  transition: color 200ms var(--ease-out);
+}
+
+.b-chip::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 12px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 220ms var(--ease-out);
+}
+
+.b-chip:hover,
+.b-chip.active {
+  color: var(--rose);
+}
+
+.b-chip:hover::after,
+.b-chip:focus-visible::after,
+.b-chip.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .b-count {
-  color: var(--color-muted);
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
 }
 
-/* 文章卡片 */
+/* 文章列表 */
+/* 固定列数，格子边线才对得齐；列数变化时同步改下面的 nth-child */
 .b-grid {
-  max-width: 1080px;
-  margin: 36px auto 0;
-  padding: 0 24px 88px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0 clamp(22px, 5vw, 80px) clamp(72px, 8vw, 116px);
 }
 
 .b-card {
-  position: relative;
-  display: block;
-  padding: 30px 28px 24px;
-  background: #fff;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(34px, 3.4vw, 46px) clamp(20px, 2.4vw, 34px);
+  border-bottom: 1px solid var(--line);
   color: inherit;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  transition: background 220ms var(--ease-out);
 }
 
-.b-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: var(--gradient-primary);
+.b-card:not(:nth-child(3n)) {
+  border-right: 1px solid var(--line);
 }
 
 .b-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 28px 64px rgba(230, 73, 128, 0.2);
+  background: var(--bone);
 }
 
 .b-card-date {
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--pink);
+  margin: 0;
+  color: var(--rose);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
 }
 
 .b-card-title {
-  margin-top: 6px;
+  margin: 14px 0 0;
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 
 .b-card-excerpt {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: var(--color-muted);
   display: -webkit-box;
+  margin: 14px 0 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.75;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .b-card-meta {
-  margin-top: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 26px;
 }
 
 .b-card-cat {
-  padding: 4px 14px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 214, 231, 0.5);
-  color: var(--rose);
-  font-size: 0.8rem;
-  font-weight: 600;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
 }
 
 .b-card-more {
   color: var(--rose);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 /* 空结果 */
 .b-empty {
-  padding: 60px 24px 100px;
-  text-align: center;
-  color: var(--color-muted);
+  padding: clamp(70px, 9vw, 130px) clamp(22px, 5vw, 80px);
+  color: var(--muted);
+}
+
+.b-empty p {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  letter-spacing: -0.03em;
+  color: var(--ink);
 }
 
 .b-empty-clear {
-  margin-top: 12px;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 0;
   border: none;
   background: none;
   color: var(--rose);
   font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   text-decoration: underline;
+  text-underline-offset: 5px;
   cursor: pointer;
 }
 
@@ -195,53 +209,55 @@
 .b-article {
   max-width: 760px;
   margin: 0 auto;
-  padding: 140px 24px 24px;
+  padding: clamp(46px, 6vw, 84px) clamp(22px, 5vw, 24px) 24px;
 }
 
 .b-back {
-  display: inline-block;
-  margin-bottom: 28px;
-  padding: 8px 20px;
+  display: block;
+  width: fit-content;
+  min-height: 44px;
+  margin-bottom: clamp(30px, 4vw, 52px);
+  padding: 0;
   border: none;
-  border-radius: var(--radius-pill);
-  background: rgba(230, 73, 128, 0.08);
-  color: var(--rose);
+  background: none;
+  color: var(--muted);
   font-family: inherit;
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: color 200ms var(--ease-out);
 }
 
 .b-back:hover {
-  background: rgba(230, 73, 128, 0.16);
-  transform: translateY(-1px);
+  color: var(--rose);
 }
 
 .b-article-cat {
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 214, 231, 0.55);
+  display: block;
   color: var(--rose);
-  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
 }
 
 .b-article-title {
   margin-top: 16px;
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 .b-article-date {
-  margin-top: 12px;
-  color: var(--color-muted);
-  font-size: 0.9rem;
+  margin-top: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   letter-spacing: 0.1em;
 }
 
@@ -272,11 +288,12 @@
 }
 
 .b-article-body blockquote {
-  margin: 1.4em 0;
-  padding: 14px 20px;
-  background: rgba(255, 214, 231, 0.28);
-  border-left: 4px solid var(--pink);
-  border-radius: 0 16px 16px 0;
+  margin: 1.6em 0;
+  padding: 4px 0 4px 24px;
+  border-left: 2px solid var(--rose);
+  color: var(--muted);
+  font-family: var(--font-serif);
+  font-size: 1.1em;
 }
 
 .b-article-body blockquote p:last-child {
@@ -284,21 +301,21 @@
 }
 
 .b-article-body code {
-  padding: 2px 8px;
-  border-radius: 8px;
-  background: rgba(255, 214, 231, 0.45);
+  padding: 2px 7px;
+  border-radius: 2px;
+  background: var(--paper-deep);
   color: var(--rose);
   font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
   font-size: 0.9em;
 }
 
 .b-article-body pre {
-  margin: 1.4em 0;
-  padding: 20px 24px;
-  border-radius: 16px;
-  background: #432c37;
-  color: #ffe3ee;
+  margin: 1.6em 0;
+  padding: 22px 24px;
   overflow-x: auto;
+  border-radius: 3px;
+  background: var(--plum);
+  color: var(--bone);
 }
 
 .b-article-body pre code {
@@ -329,23 +346,23 @@
 
 .b-article-body img {
   max-width: 100%;
-  border-radius: 16px;
+  border-radius: 3px;
 }
 
 .b-article-body hr {
-  margin: 2em 0;
+  margin: 2.4em 0;
   border: none;
-  border-top: 2px dashed rgba(230, 73, 128, 0.2);
+  border-top: 1px solid var(--line);
 }
 
 /* 上一篇 / 下一篇 */
 .b-pager {
-  max-width: 760px;
-  margin: 12px auto 0;
-  padding: 0 24px 88px;
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: clamp(20px, 4vw, 48px);
+  max-width: 760px;
+  margin: clamp(46px, 5vw, 76px) auto 0;
+  padding: 0 clamp(22px, 5vw, 24px) clamp(72px, 8vw, 112px);
 }
 
 .b-pager-slot {
@@ -355,18 +372,15 @@
 .b-pager-link {
   flex: 1;
   display: block;
-  padding: 18px 22px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: var(--shadow-soft);
-  text-decoration: none;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
   color: inherit;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  transition: color 200ms var(--ease-out);
 }
 
 .b-pager-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 24px 48px rgba(230, 73, 128, 0.18);
+  color: var(--rose);
 }
 
 .b-pager-link.next {
@@ -375,32 +389,59 @@
 
 .b-pager-dir {
   display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
+  color: var(--rose);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
   letter-spacing: 0.1em;
-  color: var(--pink);
 }
 
 .b-pager-name {
   display: block;
-  margin-top: 4px;
+  margin-top: 8px;
   font-family: var(--font-serif);
+  font-size: 1.15rem;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
 }
 
 /* ============================================
    响应式
    ============================================ */
+@media (max-width: 1080px) {
+  .b-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .b-card:not(:nth-child(3n)) {
+    border-right: 0;
+  }
+
+  .b-card:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+}
+
 @media (max-width: 640px) {
-  .b-article {
-    padding-top: 120px;
+  .b-controls {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding-inline: 18px;
   }
 
   .b-grid {
     grid-template-columns: minmax(0, 1fr);
-    padding-inline: 20px;
-    padding-bottom: 64px;
+    padding-inline: 18px;
+    padding-bottom: 72px;
+  }
+
+  .b-card:not(:nth-child(3n)),
+  .b-card:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .b-card {
+    padding-inline: 0;
   }
 
   .b-pager {

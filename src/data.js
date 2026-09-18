@@ -53,7 +53,7 @@ export const home = {
   ],
 }
 
-// 首页顶部的分类导航；href 可覆盖默认跳转（默认跳博客对应分类）
+// 写作主题；href 可覆盖默认跳转（默认跳博客对应分类）
 export const categories = [
   { name: '哲学思考' },
   { name: '技术探索' },
@@ -61,58 +61,6 @@ export const categories = [
   { name: '旅行', href: '/travel' },
   { name: '美食' },
   { name: '摄影' },
-]
-
-// 旅行页内容 —— trips 里是示例，换成你自己的旅行故事
-export const travel = {
-  badge: 'TRAVEL · 在路上',
-  title: '把世界走成一首长诗',
-  quote: {
-    text: '世界是一本书，不旅行的人只读了一页。',
-    author: '奥古斯丁',
-  },
-  trips: [
-    {
-      date: '示例 · 某年春',
-      place: '京都',
-      note: '樱花落在哲学之道上，走着走着，就想明白了一些事。',
-    },
-    {
-      date: '示例 · 某年夏',
-      place: '青海湖',
-      note: '湖面是天空的镜子，列车从画里缓缓开过。',
-    },
-    {
-      date: '示例 · 某年秋',
-      place: '重庆',
-      note: '在洪崖洞的灯火里吃火锅，辣出了眼泪，也笑出了声。',
-    },
-  ],
-  wishlist: ['冰岛', '摩洛哥', '北海道', '新西兰', '大理', '喀什'],
-}
-
-// 首页名言库 —— 每次打开随机显示一句，想增删改这里
-export const quotes = [
-  {
-    text: '世界上有两样东西能深深震撼人们的心灵：一件是我们头顶灿烂的星空，另一件是我们内心崇高的道德律。',
-    author: '康德',
-  },
-  {
-    text: '美是到处都有的。对于我们的眼睛，不是缺少美，而是缺少发现。',
-    author: '罗丹',
-  },
-  {
-    text: '有一个早晨我扔掉了所有的昨天，从此我的脚步就轻盈了。',
-    author: '泰戈尔',
-  },
-  {
-    text: '凡是过往，皆为序章。',
-    author: '莎士比亚',
-  },
-  {
-    text: '且视他人之疑目如盏盏鬼火，大胆地去走你的夜路。',
-    author: '史铁生',
-  },
 ]
 
 export const about = {
@@ -128,23 +76,6 @@ export const about = {
 export const footer = {
   copyright: `© ${new Date().getFullYear()} yuyuyuu`,
 }
-
-// 首页导航里的页面入口（接在分类导航后面）
-export const navExtras = [
-  { name: '博客', href: '/blog' },
-  { name: '瞬间', href: '/moments' },
-  { name: '书架', href: '/books' },
-]
-
-// 子页面顶栏的互跳链接
-export const subPages = [
-  { name: '项目', href: '/projects' },
-  { name: '博客', href: '/blog' },
-  { name: '瞬间', href: '/moments' },
-  { name: '书架', href: '/books' },
-  { name: '旅行', href: '/travel' },
-  { name: '衣橱', href: '/wardrobe' },
-]
 
 // 博客页文案；文章本身在 src/posts/ 里，用 Markdown 写
 export const blog = {

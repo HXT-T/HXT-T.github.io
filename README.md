@@ -15,21 +15,55 @@ npm run dev    # http://localhost:5173
 
 ## 页面结构
 
-| 路径 | 入口 html | 页面组件 | 内容来源 |
-| --- | --- | --- | --- |
-| `/` | `index.html` | `src/App.jsx` | `src/data.js` + `src/data/projects.js` |
-| `/projects` | `projects.html` | `src/projects/Projects.jsx` | `src/data/projects.js` |
-| `/travel` | `travel.html` | `src/travel/Travel.jsx` | `src/data.js` |
-| `/blog` | `blog.html` | `src/blog/Blog.jsx` | `src/posts/*.md` |
-| `/moments` | `moments.html` | `src/moments/Moments.jsx` | `src/data.js` |
-| `/books` | `books.html` | `src/books/Books.jsx` | `src/data.js` |
-| `/wardrobe` | `wardrobe.html` | `src/wardrobe/Wardrobe.jsx` | 访客浏览器里的 IndexedDB |
+| 编号 | 路径 | 入口 html | 页面组件 | 内容来源 |
+| --- | --- | --- | --- | --- |
+| 00 | `/` | `index.html` | `src/App.jsx` | `src/data.js` + `src/data/projects.js` |
+| 01 | `/projects` | `projects.html` | `src/projects/Projects.jsx` | `src/data/projects.js` |
+| 02 | `/blog` | `blog.html` | `src/blog/Blog.jsx` | `src/posts/*.md` |
+| 03 | `/books` | `books.html` | `src/books/Books.jsx` | `src/data.js` |
+| 04 | `/moments` | `moments.html` | `src/moments/Moments.jsx` | `src/data.js` |
+| 05 | `/travel` | `travel.html` | `src/travel/Travel.jsx` | 访客浏览器里的 IndexedDB |
+| 06 | `/wardrobe` | `wardrobe.html` | `src/wardrobe/Wardrobe.jsx` | 访客浏览器里的 IndexedDB |
 
-多页入口见 `vite.config.js`。子页面共享顶栏/页脚（`src/components/`）与骨架样式（`src/pages.css`），各页面的专属样式在同目录 css 里。
+多页入口见 `vite.config.js`。
+
+### 站点地图是唯一来源
+
+`src/data/navigation.js` 是全站唯一的页面清单。顶栏、页脚索引、首页的生活入口、
+每个页面的编号都从它推导，新增或改名页面只改这一处。
+
+- `masthead: true` 的页面出现在顶栏，其余只出现在页脚的完整索引里。
+- `group` 决定页面的归属：`work`（作品、写作）/ `garden`（书架、瞬间、旅行）/ `lab`（独立小工具）。
+- `index` 是页面在站点里的编号，页脚的署名 `03 / BOOKS` 就来自这里。
+
+### 页面外壳
+
+除 `/travel` 外的每个页面都是同一套结构，不需要各写一遍：
+
+```jsx
+<SiteFrame current="books">          {/* 顶栏 + 页脚 + 关于弹窗 + 跳过导航 */}
+  <main className="page-main" id="main-content" tabIndex="-1">
+    <PageMasthead page="books" eyebrow="…" title="…" description="…" aside={…} />
+    {/* 页面内容 */}
+  </main>
+</SiteFrame>
+```
+
+- `src/components/SiteChrome.jsx` —— 顶栏、页脚、关于弹窗、`SiteFrame` 外壳
+- `src/components/PageMasthead.jsx` —— 页头（编号 + 大标题 + 说明 + 右侧小注）
+- `src/components/SectionHeading.jsx` —— 页面内部的分区标题
+
+`/travel`（蛙迹）是刻意独立的小应用，有自己的配色与外壳，不走这套骨架。
+
+### 样式
+
+`src/index.css` 是全站唯一的基础样式：配色变量、排版、顶栏、页头、页脚、关于弹窗。
+各页面的专属样式在同目录的 css 里，只用 `index.css` 里定义的变量，不要再自己定义一套配色。
 
 ## 修改内容
 
-站点文案（昵称、头衔、标签、名言库、旅行足迹、瞬间、书架）集中在 `src/data.js`。
+站点文案（昵称、头衔、标签、瞬间、书架、各页页头）集中在 `src/data.js`；
+页面清单与编号在 `src/data/navigation.js`；项目数据在 `src/data/projects.js`。
 
 ## 添加项目 / Demo
 
