@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { about, footer, home, site } from '../data.js'
-
-const navigation = [
-  { id: 'home', name: 'Home', href: '/' },
-  { id: 'projects', name: 'Product Lab', href: '/projects', priority: true },
-  { id: 'writing', name: 'Writing', href: '/blog' },
-  { id: 'books', name: 'Books', href: '/books' },
-  { id: 'moments', name: 'Moments', href: '/moments' },
-]
+import { indexPages, mastheadPages, pageSignature } from '../data/navigation.js'
 
 export function SiteHeader({ current, onOpenAbout }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -56,10 +49,17 @@ export function SiteHeader({ current, onOpenAbout }) {
         id="primary-navigation"
         aria-label="站点导航"
       >
-        {navigation.map((item) => (
+        <a
+          href={current === 'home' ? '#main-content' : '/'}
+          aria-current={current === 'home' ? 'page' : undefined}
+          onClick={closeMenu}
+        >
+          Home
+        </a>
+        {mastheadPages.map((item) => (
           <a
             className={item.priority ? 'nav-priority' : undefined}
-            href={current === 'home' && item.id === 'home' ? '#main-content' : item.href}
+            href={item.href}
             key={item.id}
             aria-current={item.id === current ? 'page' : undefined}
             onClick={closeMenu}
@@ -196,23 +196,33 @@ export function AboutModal({ onClose }) {
   )
 }
 
-export function SiteFooter({ index = '07 / COLOPHON' }) {
+export function SiteFooter({ current }) {
   return (
     <footer className="site-footer">
       <div className="footer-lead">
-        <span className="footer-index">{index}</span>
+        <span className="footer-index">{pageSignature(current)}</span>
         <p>继续写，继续做，也继续成为美好本身。</p>
       </div>
 
-      <div className="footer-links" aria-label="页脚链接">
-        <a href="/projects">Projects</a>
-        <a href="/blog">Blog</a>
-        <a href="/moments">Moments</a>
-        <a href="/books">Books</a>
-        <a href="/travel">Travel</a>
-        <a href="/wardrobe">Wardrobe</a>
+      {/* 页脚是全站的完整索引：顶栏只放固定栏目，这里放每一个页面 */}
+      <div className="footer-links" aria-label="全部页面">
+        {indexPages.map((page) => (
+          <a
+            href={page.href}
+            key={page.id}
+            aria-current={page.id === current ? 'page' : undefined}
+          >
+            <span className="footer-link-index" aria-hidden="true">
+              {page.index}
+            </span>
+            {page.name}
+          </a>
+        ))}
         <a href={site.githubUrl} target="_blank" rel="noreferrer">
-          GitHub ↗
+          <span className="footer-link-index" aria-hidden="true">
+            ↗
+          </span>
+          GitHub
         </a>
       </div>
 
@@ -227,7 +237,9 @@ export function SiteFooter({ index = '07 / COLOPHON' }) {
   )
 }
 
-export default function SiteFrame({ current, footerIndex, children }) {
+// 全站唯一的页面外壳：跳转链接 + 顶栏 + 内容 + 页脚 + 关于弹窗。
+// current 是 src/data/navigation.js 里的页面 id。
+export default function SiteFrame({ current, children }) {
   const [aboutOpen, setAboutOpen] = useState(false)
 
   return (
@@ -237,7 +249,7 @@ export default function SiteFrame({ current, footerIndex, children }) {
       </a>
       <SiteHeader current={current} onOpenAbout={() => setAboutOpen(true)} />
       {children}
-      <SiteFooter index={footerIndex} />
+      <SiteFooter current={current} />
       {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
     </>
   )

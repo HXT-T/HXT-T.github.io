@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { marked } from 'marked'
-import SubNav from '../components/SubNav.jsx'
-import SubFooter from '../components/SubFooter.jsx'
+import SiteFrame from '../components/SiteChrome.jsx'
+import PageMasthead from '../components/PageMasthead.jsx'
 import { blog, categories } from '../data.js'
 import { posts } from './posts.js'
 
@@ -19,13 +19,23 @@ function readParams() {
   }
 }
 
-function Hero() {
+function Hero({ total }) {
   return (
-    <section className="p-hero">
-      <span className="p-badge">{blog.badge}</span>
-      <h1 className="p-title">{blog.title}</h1>
-      <p className="p-sub">{blog.sub}</p>
-    </section>
+    <PageMasthead
+      page="writing"
+      eyebrow={blog.badge}
+      title={blog.title}
+      description={blog.sub}
+      aside={(
+        <>
+          <span className="page-masthead__aside-index">
+            ARCHIVE / {String(total).padStart(2, '0')} 篇
+          </span>
+          <p>Notes are allowed to stay unfinished.</p>
+          <small>按分类筛选，或直接搜标题与正文。链接可以直接分享。</small>
+        </>
+      )}
+    />
   )
 }
 
@@ -82,7 +92,7 @@ function Article({ post, onBack, onOpen }) {
   }, [post])
 
   return (
-    <main className="p-main">
+    <main className="page-main" id="main-content" tabIndex="-1">
       <article className="b-article">
         <button type="button" className="b-back" onClick={onBack}>
           ← 返回列表
@@ -139,87 +149,83 @@ export default function Blog() {
   })
 
   return (
-    <>
-      <SubNav current="/blog" />
+    <SiteFrame current="writing">
       {post ? (
         <Article
           post={post}
           onBack={() => navigate({ q: params.q, category: params.category })}
-          onOpen={(slug) => navigate({ post: slug })}
+          onOpen={(slug) => navigate({ ...params, post: slug })}
         />
       ) : (
-        <>
-          <Hero />
-          <main className="p-main">
-            <div className="b-controls">
-              <div className="b-search">
-                <input
-                  type="search"
-                  value={params.q}
-                  onChange={(e) =>
-                    navigate({ ...params, q: e.target.value }, { replace: true })
-                  }
-                  placeholder="搜索标题、正文或分类……"
-                  aria-label="搜索文章"
-                />
-              </div>
-              <div className="b-chips">
-                <button
-                  type="button"
-                  className={`b-chip${params.category === '' ? ' active' : ''}`}
-                  onClick={() =>
-                    navigate({ ...params, category: '' }, { replace: true })
-                  }
-                >
-                  全部
-                </button>
-                {categoryNames.map((name) => (
-                  <button
-                    key={name}
-                    type="button"
-                    className={`b-chip${params.category === name ? ' active' : ''}`}
-                    onClick={() =>
-                      navigate(
-                        {
-                          ...params,
-                          category: params.category === name ? '' : name,
-                        },
-                        { replace: true },
-                      )
-                    }
-                  >
-                    {name}
-                  </button>
-                ))}
-              </div>
-              <p className="b-count">共 {visible.length} 篇</p>
+        <main className="page-main" id="main-content" tabIndex="-1">
+          <Hero total={posts.length} />
+          <div className="b-controls">
+            <div className="b-search">
+              <input
+                type="search"
+                value={params.q}
+                onChange={(e) =>
+                  navigate({ ...params, q: e.target.value }, { replace: true })
+                }
+                placeholder="搜索标题、正文或分类……"
+                aria-label="搜索文章"
+              />
             </div>
-            {visible.length > 0 ? (
-              <div className="b-grid">
-                {visible.map((p) => (
-                  <PostCard
-                    key={p.slug}
-                    post={p}
-                    onOpen={(slug) => navigate({ post: slug })}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="b-empty">
-                <p>{blog.emptyText}</p>
+            <div className="b-chips">
+              <button
+                type="button"
+                className={`b-chip${params.category === '' ? ' active' : ''}`}
+                onClick={() =>
+                  navigate({ ...params, category: '' }, { replace: true })
+                }
+              >
+                全部
+              </button>
+              {categoryNames.map((name) => (
                 <button
+                  key={name}
                   type="button"
-                  className="b-empty-clear"
-                  onClick={() => navigate({}, { replace: true })}
+                  className={`b-chip${params.category === name ? ' active' : ''}`}
+                  onClick={() =>
+                    navigate(
+                      {
+                        ...params,
+                        category: params.category === name ? '' : name,
+                      },
+                      { replace: true },
+                    )
+                  }
                 >
-                  清除筛选
+                  {name}
                 </button>
-              </div>
-            )}
-          </main>
-        </>
+              ))}
+            </div>
+            <p className="b-count">共 {visible.length} 篇</p>
+          </div>
+          {visible.length > 0 ? (
+            <div className="b-grid">
+              {visible.map((p) => (
+                <PostCard
+                  key={p.slug}
+                  post={p}
+                  onOpen={(slug) => navigate({ ...params, post: slug })}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="b-empty">
+              <p>{blog.emptyText}</p>
+              <button
+                type="button"
+                className="b-empty-clear"
+                onClick={() => navigate({}, { replace: true })}
+              >
+                清除筛选
+              </button>
+            </div>
+          )}
+        </main>
       )}
-      <SubFooter />
-    </>
+    </SiteFrame>
   )
 }

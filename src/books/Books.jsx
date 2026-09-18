@@ -1,5 +1,5 @@
-import SubNav from '../components/SubNav.jsx'
-import SubFooter from '../components/SubFooter.jsx'
+import SiteFrame from '../components/SiteChrome.jsx'
+import PageMasthead from '../components/PageMasthead.jsx'
 import { booksPage } from '../data.js'
 
 // 三栏固定顺序：在读 → 读过 → 想读
@@ -32,14 +32,22 @@ function BookCard({ book }) {
 
 export default function Books() {
   return (
-    <>
-      <SubNav current="/books" />
-      <section className="p-hero">
-        <span className="p-badge">{booksPage.badge}</span>
-        <h1 className="p-title">{booksPage.title}</h1>
-        <p className="p-sub">{booksPage.sub}</p>
-      </section>
-      <main className="p-main">
+    <SiteFrame current="books">
+      <main className="page-main" id="main-content" tabIndex="-1">
+        <PageMasthead
+          page="books"
+          eyebrow={booksPage.badge}
+          title={booksPage.title}
+          description={booksPage.sub}
+          aside={(
+            <>
+              <span className="page-masthead__aside-index">SHELF / {String(booksPage.items.length).padStart(2, '0')} 本</span>
+              <p>在读 · 读过 · 想读。</p>
+              <small>一本书读到哪里，就放在哪一栏。读过的标上评分与一句留言。</small>
+            </>
+          )}
+        />
+
         <div className="bk-columns">
           {COLUMNS.map((col) => {
             const items = booksPage.items.filter((b) => b.status === col.status)
@@ -57,7 +65,6 @@ export default function Books() {
           })}
         </div>
       </main>
-      <SubFooter />
-    </>
+    </SiteFrame>
   )
 }

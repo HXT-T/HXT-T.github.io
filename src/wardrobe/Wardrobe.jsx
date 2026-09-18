@@ -3,8 +3,8 @@
 // 数据全在本地浏览器（IndexedDB），没有后端，也不上传
 // ============================================
 import { useEffect, useMemo, useRef, useState } from 'react'
-import SubNav from '../components/SubNav.jsx'
-import SubFooter from '../components/SubFooter.jsx'
+import SiteFrame from '../components/SiteChrome.jsx'
+import PageMasthead from '../components/PageMasthead.jsx'
 import { wardrobePage } from '../data.js'
 import {
   CATEGORIES,
@@ -267,15 +267,23 @@ export default function Wardrobe() {
   const maxCategoryCount = Math.max(1, ...stats.byCategory.map((c) => c.count))
 
   return (
-    <>
-      <SubNav current="/wardrobe" />
-      <section className="p-hero">
-        <span className="p-badge">{wardrobePage.badge}</span>
-        <h1 className="p-title">{wardrobePage.title}</h1>
-        <p className="p-sub">{wardrobePage.sub}</p>
-      </section>
+    <SiteFrame current="wardrobe">
+      <main className="page-main" id="main-content" tabIndex="-1">
+        <PageMasthead
+          page="wardrobe"
+          eyebrow={wardrobePage.badge}
+          title={wardrobePage.title}
+          description={wardrobePage.sub}
+          aside={(
+            <>
+              <span className="page-masthead__aside-index">LOCAL ONLY / NO SERVER</span>
+              <p>衣服只存在这台设备里。</p>
+              <small>单品与搭配存在浏览器的 IndexedDB，不会上传。换设备前记得在页面底部导出备份。</small>
+            </>
+          )}
+        />
 
-      <main className="p-main wd-main">
+        <div className="wd-main">
         {notice && (
           <p className="wd-notice" role="status">
             {notice}
@@ -582,6 +590,7 @@ export default function Wardrobe() {
             </section>
           </>
         )}
+        </div>
       </main>
 
       {editing && (
@@ -592,8 +601,6 @@ export default function Wardrobe() {
           onDelete={deleteItem}
         />
       )}
-
-      <SubFooter />
-    </>
+    </SiteFrame>
   )
 }

@@ -1,6 +1,7 @@
 import ProjectCard from '../components/ProjectCard.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
-import { categories, home, site, subPages } from '../data.js'
+import { categories, home, site } from '../data.js'
+import { pagesInGroup } from '../data/navigation.js'
 import { projects, isBuildingMvp, sortProjects } from '../data/projects.js'
 import { posts } from '../blog/posts.js'
 
@@ -238,9 +239,7 @@ function PersonalIndex() {
   const activeTopics = categories.filter(
     (category) => !category.href && topicCounts[category.name],
   )
-  const personalPages = subPages.filter((page) =>
-    ['/books', '/moments', '/travel'].includes(page.href),
-  )
+  const personalPages = pagesInGroup('garden')
 
   return (
     <section className="editorial-section garden-section" id="garden">
@@ -270,10 +269,10 @@ function PersonalIndex() {
         <aside className="garden-aside">
           <p className="garden-statement">个人互联网不只收纳成果，也收纳一个人如何生活、阅读与改变。</p>
           <div className="garden-paths" aria-label="个人内容入口">
-            {personalPages.map((page, index) => (
-              <a href={page.href} key={page.href}>
-                <span>0{index + 1}</span>
-                <strong>{page.name}</strong>
+            {personalPages.map((page) => (
+              <a href={page.href} key={page.id}>
+                <span>{page.index}</span>
+                <strong>{page.label}</strong>
                 <span aria-hidden="true">→</span>
               </a>
             ))}
