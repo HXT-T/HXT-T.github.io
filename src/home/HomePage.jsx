@@ -1,13 +1,11 @@
 import ProjectCard from '../components/ProjectCard.jsx'
+import SiteFrame from '../components/SiteChrome.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
-import { categories, home, site } from '../data.js'
+import { home, site } from '../data.js'
 import { pagesInGroup } from '../data/navigation.js'
 import { projects, isBuildingMvp, sortProjects } from '../data/projects.js'
-import { posts } from '../blog/posts.js'
-
-function formatDate(date) {
-  return date ? date.replaceAll('-', '.') : ''
-}
+import { posts, topics } from '../blog/posts.js'
+import { formatDate } from '../format.js'
 
 function Cover() {
   const latestPost = posts[0]
@@ -232,13 +230,6 @@ function NowSection() {
 }
 
 function PersonalIndex() {
-  const topicCounts = posts.reduce((counts, post) => {
-    counts[post.category] = (counts[post.category] || 0) + 1
-    return counts
-  }, {})
-  const activeTopics = categories.filter(
-    (category) => !category.href && topicCounts[category.name],
-  )
   const personalPages = pagesInGroup('garden')
 
   return (
@@ -252,7 +243,7 @@ function PersonalIndex() {
 
       <div className="garden-layout">
         <div className="topic-list" aria-label="有内容的主题">
-          {activeTopics.map((topic, index) => (
+          {topics.map((topic, index) => (
             <a
               className="topic-row"
               href={`${site.blogUrl}?category=${encodeURIComponent(topic.name)}`}
@@ -260,7 +251,7 @@ function PersonalIndex() {
             >
               <span className="topic-order">0{index + 1}</span>
               <strong>{topic.name}</strong>
-              <span>{String(topicCounts[topic.name]).padStart(2, '0')} NOTES</span>
+              <span>{String(topic.count).padStart(2, '0')} NOTES</span>
               <span aria-hidden="true">↗</span>
             </a>
           ))}
@@ -285,13 +276,15 @@ function PersonalIndex() {
 
 export default function HomePage() {
   return (
-    <main id="main-content" tabIndex="-1">
-      <Cover />
-      <BuildingSection />
-      <ExperimentsSection />
-      <LatestWriting />
-      <NowSection />
-      <PersonalIndex />
-    </main>
+    <SiteFrame current="home">
+      <main className="page-main" id="main-content" tabIndex="-1">
+        <Cover />
+        <BuildingSection />
+        <ExperimentsSection />
+        <LatestWriting />
+        <NowSection />
+        <PersonalIndex />
+      </main>
+    </SiteFrame>
   )
 }

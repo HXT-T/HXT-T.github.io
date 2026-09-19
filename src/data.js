@@ -53,16 +53,6 @@ export const home = {
   ],
 }
 
-// 写作主题；href 可覆盖默认跳转（默认跳博客对应分类）
-export const categories = [
-  { name: '哲学思考' },
-  { name: '技术探索' },
-  { name: '阅读' },
-  { name: '旅行', href: '/travel' },
-  { name: '美食' },
-  { name: '摄影' },
-]
-
 export const about = {
   heading: '关于我',
   paragraphs: [
@@ -155,6 +145,13 @@ export const booksPage = {
       note: '想看看数学、艺术与音乐如何在「怪圈」里相遇。',
     },
   ],
+}
+
+// 「旅行」页 —— 只有文案；明信片存在访客自己的浏览器里（IndexedDB）
+export const travelPage = {
+  badge: 'TRAVEL · 蛙迹',
+  title: '把旅途收进明信片',
+  sub: '记录地点、心情与沿途的小事 —— 苔苔替你收好每一张照片',
 }
 
 // 「电子衣橱」页 —— 只有文案；衣服数据存在访客自己的浏览器里（IndexedDB）

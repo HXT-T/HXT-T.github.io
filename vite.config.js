@@ -2,11 +2,9 @@ import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// base 保持默认 '/'：主页部署在 hxt-t.github.io 根路径，博客在 /blog 子路径
-// 多页入口：index.html → /，travel.html → /travel，
-//           projects.html → /projects，blog.html → /blog，
-//           moments.html → /moments，books.html → /books，
-//           wardrobe.html → /wardrobe
+// base 保持默认 '/'：主页部署在 hxt-t.github.io 根路径
+// 每个页面一个入口 html，对应 src/<页面>/main.jsx；
+// 页面清单与编号见 src/data/navigation.js
 export default defineConfig({
   plugins: [react()],
   build: {

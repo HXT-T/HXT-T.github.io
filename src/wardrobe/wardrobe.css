@@ -16,9 +16,7 @@
 }
 
 .wd-main {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: clamp(36px, 4vw, 56px) 24px 80px;
+  padding: clamp(36px, 4vw, 56px) clamp(22px, 5vw, 80px) clamp(72px, 8vw, 110px);
 }
 
 .wd-sr-only {
@@ -31,201 +29,206 @@
 }
 
 /* ============================================
-   基础控件
+   基础控件 —— 方角、细线、实心主按钮，与全站同一套语言
    ============================================ */
 .wd-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 9px 20px;
-  border: none;
-  border-radius: var(--radius-pill);
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
   font: inherit;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--color-text);
-  background: rgba(255, 255, 255, 0.8);
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition: color 200ms var(--ease-out), border-color 200ms var(--ease-out),
+    background 200ms var(--ease-out);
 }
 
 .wd-btn:hover {
-  transform: translateY(-1px);
+  color: var(--rose);
+  border-color: var(--rose);
 }
 
 .wd-btn:disabled {
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: progress;
-  transform: none;
 }
 
 .wd-btn-primary {
-  color: #fff;
-  background: var(--gradient-primary);
-  box-shadow: var(--shadow-btn);
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.wd-btn-primary:hover:not(:disabled) {
+  border-color: var(--rose);
+  background: var(--rose);
+  color: var(--paper);
 }
 
 .wd-btn-ghost {
-  border: 1px solid color-mix(in srgb, var(--rose) 22%, transparent);
+  border-color: var(--line);
   color: var(--rose);
-  background: rgba(255, 255, 255, 0.7);
 }
 
 .wd-btn-plain {
-  padding: 6px 12px;
-  color: var(--color-muted);
-  background: transparent;
-  font-weight: 500;
+  padding: 0 4px;
+  border-color: transparent;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .wd-btn-plain:hover {
+  border-color: transparent;
   color: var(--rose);
 }
 
 .wd-btn-lg {
-  padding: 13px 34px;
-  font-size: 1rem;
+  padding: 0 30px;
 }
 
 .wd-danger:hover {
-  color: #c0392b;
+  color: var(--rose);
+  border-color: transparent;
 }
 
 .wd-icon-btn {
-  width: 32px;
-  height: 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.86);
-  color: var(--color-muted);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
   font-size: 1rem;
   line-height: 1;
   cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition: color 200ms var(--ease-out);
 }
 
-.wd-icon-btn:hover {
-  color: var(--rose);
-  background: color-mix(in srgb, var(--blush) 70%, transparent);
-}
-
+.wd-icon-btn:hover,
 .wd-icon-btn.is-on {
   color: var(--rose);
 }
 
 .wd-input {
   width: 100%;
-  padding: 10px 16px;
-  border: 1px solid color-mix(in srgb, var(--rose) 18%, transparent);
-  border-radius: 6px;
+  min-height: 44px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
   font: inherit;
-  font-size: 0.95rem;
-  color: var(--color-text);
-  background: rgba(255, 255, 255, 0.85);
+  font-size: 0.92rem;
+  transition: border-color 200ms var(--ease-out);
+}
+
+.wd-input:focus {
+  outline: none;
+  border-bottom-color: var(--rose);
 }
 
 .wd-input::placeholder {
-  color: color-mix(in srgb, var(--muted) 55%, transparent);
+  color: var(--muted);
 }
 
 .wd-range {
   width: 100%;
   max-width: 420px;
-  accent-color: var(--pink);
+  accent-color: var(--rose);
 }
 
 .wd-label {
   display: block;
   margin-bottom: 8px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--color-muted);
-  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
 }
 
 .wd-label strong {
   color: var(--rose);
-  font-size: 1.05rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  letter-spacing: 0;
 }
 
 .wd-hint {
   margin-top: 8px;
-  font-size: 0.82rem;
-  color: var(--color-muted);
-  line-height: 1.6;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.7;
 }
 
 .wd-error {
-  color: #c0392b;
-  font-size: 0.88rem;
-}
-
-.wd-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.wd-chip {
-  padding: 6px 14px;
-  border: 1px solid color-mix(in srgb, var(--rose) 16%, transparent);
-  border-radius: var(--radius-pill);
-  font: inherit;
-  font-size: 0.86rem;
-  color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-}
-
-.wd-chip:hover {
   color: var(--rose);
-  border-color: color-mix(in srgb, var(--rose) 40%, transparent);
+  font-size: 0.85rem;
 }
 
-.wd-chip.is-on {
-  color: #fff;
-  background: var(--gradient-primary);
-  border-color: transparent;
-  font-weight: 600;
-}
-
+.wd-chips,
 .wd-colors {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
+.wd-chip,
 .wd-color {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 12px 5px 6px;
-  border: 1px solid color-mix(in srgb, var(--rose) 16%, transparent);
-  border-radius: var(--radius-pill);
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--muted);
   font: inherit;
-  font-size: 0.84rem;
-  color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.82rem;
   cursor: pointer;
+  transition: color 200ms var(--ease-out), border-color 200ms var(--ease-out),
+    background 200ms var(--ease-out);
+}
+
+.wd-color {
+  padding-left: 8px;
+}
+
+.wd-chip:hover,
+.wd-color:hover {
+  color: var(--rose);
+  border-color: var(--rose);
+}
+
+.wd-chip.is-on {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
 }
 
 .wd-color.is-on {
   border-color: var(--rose);
   color: var(--rose);
   font-weight: 700;
-  background: color-mix(in srgb, var(--blush) 50%, transparent);
 }
 
 .wd-color-dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
+  width: 15px;
+  height: 15px;
   border: 1px solid color-mix(in srgb, var(--ink) 15%, transparent);
+  border-radius: 50%;
 }
 
 /* ============================================
@@ -272,12 +275,9 @@
    ============================================ */
 .wd-studio {
   margin-top: 8px;
-  padding: 28px;
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--line);
+  background: var(--bone);
 }
 
 .wd-studio-head h2 {
@@ -315,7 +315,7 @@
 .wd-outfit {
   margin-top: 24px;
   padding-top: 22px;
-  border-top: 1px dashed color-mix(in srgb, var(--rose) 18%, transparent);
+  border-top: 1px solid var(--line);
   animation: wd-rise 0.5s var(--ease-out) both;
 }
 
@@ -338,7 +338,6 @@
 }
 
 .wd-piece:hover .wd-thumb {
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--rose) 20%, transparent);
 }
 
 .wd-piece-cat {
@@ -397,11 +396,11 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 18px;
-  padding: 10px 12px 10px 18px;
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--blush) 50%, transparent);
-  color: var(--rose);
-  font-size: 0.88rem;
+  padding: 10px 12px 10px 16px;
+  border-left: 2px solid var(--rose);
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 0.85rem;
 }
 
 .wd-loading,
@@ -414,11 +413,10 @@
 
 .wd-onboard {
   margin-top: 20px;
-  padding: 48px 32px;
+  padding: clamp(44px, 6vw, 68px) 32px;
+  border: 1px solid var(--line);
+  background: var(--bone);
   text-align: center;
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: var(--shadow-soft);
 }
 
 .wd-onboard h2 {
@@ -465,12 +463,12 @@
 
 .wd-sort select {
   padding: 6px 12px;
-  border: 1px solid color-mix(in srgb, var(--rose) 16%, transparent);
-  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  border-radius: 2px;
   font: inherit;
-  font-size: 0.86rem;
-  color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.82rem;
+  color: var(--muted);
+  background: var(--bone);
   cursor: pointer;
 }
 
@@ -482,16 +480,14 @@
 
 .wd-card {
   position: relative;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--rose) 8%, transparent);
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid var(--line);
+  background: var(--bone);
+  transition: border-color 220ms var(--ease-out);
 }
 
 .wd-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px color-mix(in srgb, var(--rose) 16%, transparent);
+  border-color: var(--ink);
 }
 
 .wd-card-main {
@@ -564,10 +560,10 @@
 }
 
 .wd-saved {
+  border: 1px solid var(--line);
   padding: 16px 18px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--rose) 8%, transparent);
+  background: var(--bone);
 }
 
 .wd-saved-pieces {
@@ -592,7 +588,7 @@
   gap: 8px;
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px dashed color-mix(in srgb, var(--rose) 16%, transparent);
+  border-top: 1px solid var(--line);
   font-size: 0.82rem;
   color: var(--color-muted);
 }
@@ -611,10 +607,10 @@
 }
 
 .wd-insight {
+  border: 1px solid var(--line);
   padding: 20px 22px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.66);
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--rose) 6%, transparent);
+  background: var(--bone);
 }
 
 .wd-insight h3 {
@@ -689,7 +685,7 @@
   padding: 5px 0;
   font-size: 0.86rem;
   color: var(--color-muted);
-  border-bottom: 1px dashed color-mix(in srgb, var(--rose) 10%, transparent);
+  border-bottom: 1px solid var(--line);
 }
 
 .wd-link {
@@ -725,8 +721,6 @@
   justify-content: center;
   padding: 24px;
   background: color-mix(in srgb, var(--ink) 42%, transparent);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 
 .wd-dialog {
@@ -734,10 +728,9 @@
   flex-direction: column;
   width: min(560px, 100%);
   max-height: min(88vh, 860px);
-  border-radius: 6px;
-  background: var(--color-bg);
-  box-shadow: 0 30px 80px color-mix(in srgb, var(--ink) 28%, transparent);
   overflow: hidden;
+  border: 1px solid var(--ink);
+  background: var(--paper);
 }
 
 .wd-dialog-top {
@@ -745,7 +738,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 18px 22px;
-  border-bottom: 1px solid color-mix(in srgb, var(--rose) 10%, transparent);
+  border-bottom: 1px solid var(--line);
 }
 
 .wd-dialog-top h2 {
@@ -810,8 +803,8 @@
   align-items: center;
   gap: 10px;
   padding: 16px 22px;
-  border-top: 1px solid color-mix(in srgb, var(--rose) 10%, transparent);
-  background: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid var(--line);
+  background: var(--bone);
 }
 
 .wd-spacer {
@@ -822,21 +815,8 @@
    响应式
    ============================================ */
 @media (max-width: 640px) {
-  /* 生成搭配时的入场动画（原先定义在已删除的 pages.css 里） */
-@keyframes wd-rise {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.wd-main {
-    padding: 8px 16px 64px;
+  .wd-main {
+    padding: 28px 18px 64px;
   }
 
   .wd-studio {
@@ -861,7 +841,6 @@
   .wd-dialog {
     width: 100%;
     max-height: 92vh;
-    border-radius: 6px 6px 0 0;
   }
 
   .wd-section-head {

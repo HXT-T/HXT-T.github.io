@@ -39,3 +39,13 @@ export const posts = Object.entries(modules)
     parsePost(raw, path.split('/').pop().replace(/\.md$/, '')),
   )
   .sort((a, b) => (a.date < b.date ? 1 : -1))
+
+// 分类直接从文章里数出来：有文章才会出现，数量也永远是对的。
+// 从前 src/data.js 里另外手写了一份分类表，和实际文章对不上，
+// 点进去就是空列表 —— 那份表已经删掉了。
+export const topics = [...posts.reduce((counts, post) => {
+  counts.set(post.category, (counts.get(post.category) || 0) + 1)
+  return counts
+}, new Map())]
+  .map(([name, count]) => ({ name, count }))
+  .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh-CN'))

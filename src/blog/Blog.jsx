@@ -2,13 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import { marked } from 'marked'
 import SiteFrame from '../components/SiteChrome.jsx'
 import PageMasthead from '../components/PageMasthead.jsx'
-import { blog, categories } from '../data.js'
-import { posts } from './posts.js'
+import { blog } from '../data.js'
+import { formatDate } from '../format.js'
+import { posts, topics } from './posts.js'
 
 // 单换行也渲染为换行，写随笔更顺手
 marked.use({ breaks: true })
-
-const categoryNames = [...new Set(categories.map((c) => c.name))]
 
 function readParams() {
   const sp = new URLSearchParams(window.location.search)
@@ -49,7 +48,7 @@ function PostCard({ post, onOpen }) {
         onOpen(post.slug)
       }}
     >
-      <p className="b-card-date">{post.date}</p>
+      <p className="b-card-date"><time dateTime={post.date}>{formatDate(post.date)}</time></p>
       <h3 className="b-card-title">{post.title}</h3>
       <p className="b-card-excerpt">{post.excerpt}</p>
       <div className="b-card-meta">
@@ -99,7 +98,7 @@ function Article({ post, onBack, onOpen }) {
         </button>
         <span className="b-article-cat">{post.category}</span>
         <h1 className="b-article-title">{post.title}</h1>
-        <p className="b-article-date">{post.date}</p>
+        <p className="b-article-date"><time dateTime={post.date}>{formatDate(post.date)}</time></p>
         <div
           className="b-article-body"
           // 内容来自仓库内自己的 Markdown，无用户输入
@@ -181,7 +180,7 @@ export default function Blog() {
               >
                 全部
               </button>
-              {categoryNames.map((name) => (
+              {topics.map(({ name }) => (
                 <button
                   key={name}
                   type="button"

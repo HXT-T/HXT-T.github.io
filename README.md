@@ -17,7 +17,7 @@ npm run dev    # http://localhost:5173
 
 | 编号 | 路径 | 入口 html | 页面组件 | 内容来源 |
 | --- | --- | --- | --- | --- |
-| 00 | `/` | `index.html` | `src/App.jsx` | `src/data.js` + `src/data/projects.js` |
+| 00 | `/` | `index.html` | `src/home/HomePage.jsx` | `src/data.js` + `src/data/projects.js` |
 | 01 | `/projects` | `projects.html` | `src/projects/Projects.jsx` | `src/data/projects.js` |
 | 02 | `/blog` | `blog.html` | `src/blog/Blog.jsx` | `src/posts/*.md` |
 | 03 | `/books` | `books.html` | `src/books/Books.jsx` | `src/data.js` |
@@ -25,7 +25,8 @@ npm run dev    # http://localhost:5173
 | 05 | `/travel` | `travel.html` | `src/travel/Travel.jsx` | 访客浏览器里的 IndexedDB |
 | 06 | `/wardrobe` | `wardrobe.html` | `src/wardrobe/Wardrobe.jsx` | 访客浏览器里的 IndexedDB |
 
-多页入口见 `vite.config.js`。
+每个页面都是同一副样子：入口 `<页面>.html` → `src/<页面>/main.jsx` → 页面组件 +
+同目录的 css。多页入口见 `vite.config.js`。
 
 ### 站点地图是唯一来源
 
@@ -38,7 +39,7 @@ npm run dev    # http://localhost:5173
 
 ### 页面外壳
 
-除 `/travel` 外的每个页面都是同一套结构，不需要各写一遍：
+**每一个**页面都是同一套结构，不需要各写一遍：
 
 ```jsx
 <SiteFrame current="books">          {/* 顶栏 + 页脚 + 关于弹窗 + 跳过导航 */}
@@ -53,12 +54,25 @@ npm run dev    # http://localhost:5173
 - `src/components/PageMasthead.jsx` —— 页头（编号 + 大标题 + 说明 + 右侧小注）
 - `src/components/SectionHeading.jsx` —— 页面内部的分区标题
 
-`/travel`（蛙迹）是刻意独立的小应用，有自己的配色与外壳，不走这套骨架。
+页头右边的小注（`aside`）放这一页的一句话说明或统计；需要按钮时作为 `children`
+传进去，会排在说明文字下面。
 
 ### 样式
 
 `src/index.css` 是全站唯一的基础样式：配色变量、排版、顶栏、页头、页脚、关于弹窗。
 各页面的专属样式在同目录的 css 里，只用 `index.css` 里定义的变量，不要再自己定义一套配色。
+
+版式约定：内容满幅铺开，左右留 `clamp(22px, 5vw, 80px)`；分区之间用 1px 细线，
+不用卡片阴影；圆角接近方角；强调色只用 `--rose`。写新页面照抄任意一个现有页面即可。
+
+### 不要各写一遍的东西
+
+| 想做的事 | 用这个 | 不要 |
+| --- | --- | --- |
+| 页面清单、编号、导航 | `src/data/navigation.js` | 再抄一份页面数组 |
+| 日期显示 | `src/format.js` 的 `formatDate` | 每页自己写一个 |
+| 文章分类 | `src/blog/posts.js` 的 `topics`（从文章里数出来） | 手写一份分类表 |
+| 配色、字体、圆角 | `src/index.css` 的变量 | 写死颜色值 |
 
 ## 修改内容
 
@@ -107,8 +121,22 @@ excerpt: 一句话摘要
 ```
 
 - 文件名即文章的 slug，例如 `hello.md` → `/blog?post=hello`
-- `category` 建议与 `src/data.js` 里 `categories` 的名称保持一致，列表页才能按分类筛选
+- `category` 随便写：分类是从所有文章里数出来的，写了就会出现在筛选里，
+  不用另外登记（想合并两个分类，把 frontmatter 改成同一个名字即可）
 - 构建时自动收录，无需注册
+
+## 旅行 `/travel`
+
+把照片做成明信片：填日期、地点、心情和一句随手写，存进浏览器。
+
+明信片存在 IndexedDB（`waji-photo-journal`），照片压到长边 1800px 的 JPEG，
+不上传也不跟着换设备。示例明信片写在 `src/travel/postcards.js` 的 `SEED_POSTCARDS`
+里，和访客自己存的合并后按日期倒序显示。
+
+| 文件 | 作用 |
+| --- | --- |
+| `src/travel/postcards.js` | 示例数据、心情表、IndexedDB 读写、照片压缩 |
+| `src/travel/Travel.jsx` | 页面与两个弹窗（记录 / 明信片详情） |
 
 ## 电子衣橱 `/wardrobe`
 

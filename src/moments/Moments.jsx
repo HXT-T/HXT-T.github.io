@@ -1,6 +1,7 @@
 import SiteFrame from '../components/SiteChrome.jsx'
 import PageMasthead from '../components/PageMasthead.jsx'
 import { momentsPage } from '../data.js'
+import { formatDate } from '../format.js'
 
 export default function Moments() {
   // 按日期倒序，最新的瞬间在最上面
@@ -26,7 +27,7 @@ export default function Moments() {
         <div className="m-timeline">
           {items.map((m, i) => (
             <article className="m-item" key={`${m.date}-${i}`}>
-              <span className="m-date">{m.date}</span>
+              <time className="m-date" dateTime={m.date}>{formatDate(m.date)}</time>
               <div className="m-card">{m.text}</div>
             </article>
           ))}
