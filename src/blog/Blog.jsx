@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { marked } from 'marked'
 import SiteFrame from '../components/SiteChrome.jsx'
 import PageMasthead from '../components/PageMasthead.jsx'
@@ -8,6 +8,25 @@ import { posts, topics } from './posts.js'
 
 // 单换行也渲染为换行，写随笔更顺手
 marked.use({ breaks: true })
+
+// 标题锚点：用标题文字本身做 id，目录和分享链接都靠它
+const headingId = (text) => `h-${text.trim().replace(/\s+/g, '-')}`
+marked.use({
+  renderer: {
+    heading({ tokens, depth, text }) {
+      const inner = this.parser.parseInline(tokens)
+      if (depth !== 2) return `<h${depth}>${inner}</h${depth}>\n`
+      return `<h2 id="${encodeURIComponent(headingId(text))}">${inner}</h2>\n`
+    },
+  },
+})
+
+function tableOfContents(body) {
+  return marked
+    .lexer(body)
+    .filter((token) => token.type === 'heading' && token.depth === 2)
+    .map((token) => ({ id: encodeURIComponent(headingId(token.text)), text: token.text }))
+}
 
 function readParams() {
   const sp = new URLSearchParams(window.location.search)
@@ -48,7 +67,10 @@ function PostCard({ post, onOpen }) {
         onOpen(post.slug)
       }}
     >
-      <p className="b-card-date"><time dateTime={post.date}>{formatDate(post.date)}</time></p>
+      <p className="b-card-date">
+        <time dateTime={post.date}>{formatDate(post.date)}</time>
+        <span>{post.minutes} MIN</span>
+      </p>
       <h3 className="b-card-title">{post.title}</h3>
       <p className="b-card-excerpt">{post.excerpt}</p>
       <div className="b-card-meta">
@@ -70,14 +92,43 @@ function PagerLink({ post, dir, onOpen }) {
         onOpen(post.slug)
       }}
     >
-      <span className="b-pager-dir">{dir === 'next' ? '下一篇 »' : '« 上一篇'}</span>
+      <span className="b-pager-dir">{dir === 'next' ? 'OLDER · 更早 →' : '← NEWER · 更新'}</span>
       <span className="b-pager-name">{post.title}</span>
     </a>
   )
 }
 
+// 顶部细线：读到哪里，粉色走到哪里
+function ReadingProgress() {
+  const barRef = useRef(null)
+
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      const ratio = max > 0 ? Math.min(1, window.scrollY / max) : 0
+      barRef.current?.style.setProperty('transform', `scaleX(${ratio})`)
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
+
+  return <div className="b-progress" ref={barRef} aria-hidden="true" />
+}
+
 function Article({ post, onBack, onOpen }) {
   const html = useMemo(() => marked.parse(post.body), [post])
+  const toc = useMemo(() => tableOfContents(post.body), [post])
   const index = posts.findIndex((p) => p.slug === post.slug)
   const newer = posts[index - 1]
   const older = posts[index + 1]
@@ -92,18 +143,47 @@ function Article({ post, onBack, onOpen }) {
 
   return (
     <main className="page-main" id="main-content" tabIndex="-1">
+      <ReadingProgress />
       <article className="b-article">
-        <button type="button" className="b-back" onClick={onBack}>
-          ← 返回列表
-        </button>
-        <span className="b-article-cat">{post.category}</span>
-        <h1 className="b-article-title">{post.title}</h1>
-        <p className="b-article-date"><time dateTime={post.date}>{formatDate(post.date)}</time></p>
-        <div
-          className="b-article-body"
-          // 内容来自仓库内自己的 Markdown，无用户输入
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <header className="b-article-head">
+          <button type="button" className="b-back" onClick={onBack}>
+            <span aria-hidden="true">←</span> 全部文章
+          </button>
+          <p className="b-article-meta">
+            <span className="b-article-cat">{post.category}</span>
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <span>约 {post.minutes} 分钟</span>
+          </p>
+          <h1 className="b-article-title">{post.title}</h1>
+          {post.excerpt && <p className="b-article-dek">{post.excerpt}</p>}
+        </header>
+
+        <div className="b-article-layout">
+          {toc.length > 1 && (
+            <nav className="b-toc" aria-label="文章目录">
+              <p>CONTENTS</p>
+              <ol>
+                {toc.map((item, i) => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`}>
+                      <span>{String(i + 1).padStart(2, '0')}</span>
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
+          <div
+            className="b-article-body"
+            // 内容来自仓库内自己的 Markdown，无用户输入
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </div>
+
+        <p className="b-article-end" aria-hidden="true">
+          <span>❀</span> END
+        </p>
       </article>
       <nav className="b-pager" aria-label="上一篇 / 下一篇">
         <PagerLink post={newer} dir="prev" onOpen={onOpen} />

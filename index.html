@@ -10,7 +10,18 @@
       name="description"
       content="yuyuyuu 的个人互联网与 Product Lab：正在构建的产品、短期实验、写作、阅读与仍在生长的想法。"
     />
-    <meta name="theme-color" content="#f8f4f1" />
+    <meta name="theme-color" content="#0e0b0d" />
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      // 默认夜樱（深色）；访客选过浅色就沿用。放在最前面，避免首屏闪白
+      try {
+        var t = localStorage.getItem('theme')
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark'
+        if (t === 'light') document.querySelector('meta[name="theme-color"]').content = '#f8f4f1'
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
     <link rel="canonical" href="https://hxt-t.github.io/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh_CN" />

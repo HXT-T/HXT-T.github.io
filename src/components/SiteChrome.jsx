@@ -1,8 +1,39 @@
 import { useEffect, useRef, useState } from 'react'
 import { about, footer, home, site } from '../data.js'
 import { indexPages, mastheadPages, pageSignature } from '../data/navigation.js'
+import { applyTheme, currentTheme } from '../theme.js'
+import CommandPalette from './CommandPalette.jsx'
 
-export function SiteHeader({ current, onOpenAbout }) {
+function ThemeToggle() {
+  const [theme, setTheme] = useState(currentTheme)
+  const next = theme === 'dark' ? 'light' : 'dark'
+
+  return (
+    <button
+      type="button"
+      className="tool-button"
+      aria-label={next === 'light' ? '切换到浅色' : '切换到深色'}
+      title={next === 'light' ? '日间版' : '夜樱版'}
+      onClick={() => {
+        applyTheme(next)
+        setTheme(next)
+      }}
+    >
+      {theme === 'dark' ? (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+          <path d="M20 14.6A8 8 0 1 1 9.4 4a6.4 6.4 0 0 0 10.6 10.6Z" />
+        </svg>
+      )}
+    </button>
+  )
+}
+
+export function SiteHeader({ current, onOpenAbout, onOpenPalette }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -27,22 +58,9 @@ export function SiteHeader({ current, onOpenAbout }) {
         aria-label={`${site.nickname} 首页`}
       >
         <span>{site.nickname}</span>
-        <span aria-hidden="true">/ hxt</span>
+        <i aria-hidden="true" />
+        <small aria-hidden="true">hxt</small>
       </a>
-
-      <button
-        type="button"
-        className="menu-toggle"
-        aria-expanded={menuOpen}
-        aria-controls="primary-navigation"
-        onClick={() => setMenuOpen((open) => !open)}
-      >
-        <span>{menuOpen ? 'Close' : 'Menu'}</span>
-        <span className="menu-glyph" aria-hidden="true">
-          <i />
-          <i />
-        </span>
-      </button>
 
       <nav
         className={`primary-nav${menuOpen ? ' is-open' : ''}`}
@@ -81,10 +99,35 @@ export function SiteHeader({ current, onOpenAbout }) {
         </a>
       </nav>
 
-      <p className="header-issue" aria-label={`当前刊号 ${home.issue}`}>
-        <span>{home.issue}</span>
-        <span>CN / EN</span>
-      </p>
+      <div className="header-tools">
+        <button
+          type="button"
+          className="tool-button tool-button--search"
+          onClick={onOpenPalette}
+          aria-label="搜索全站（快捷键 Ctrl K）"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5" />
+            <path d="m16 16 4.5 4.5" />
+          </svg>
+          <span>Index</span>
+          <kbd>⌘K</kbd>
+        </button>
+        <ThemeToggle />
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span>{menuOpen ? 'Close' : 'Menu'}</span>
+          <span className="menu-glyph" aria-hidden="true">
+            <i />
+            <i />
+          </span>
+        </button>
+      </div>
     </header>
   )
 }
@@ -200,12 +243,15 @@ export function SiteFooter({ current }) {
   return (
     <footer className="site-footer">
       <div className="footer-lead">
-        <span className="footer-index">{pageSignature(current)}</span>
-        <p>继续写，继续做，也继续成为美好本身。</p>
+        <p>
+          继续写，继续做，<br />
+          也继续成为<em>美好本身</em>。
+        </p>
+        <span className="footer-signature">— {site.nickname}, {pageSignature(current).toLowerCase()}</span>
       </div>
 
       {/* 页脚是全站的完整索引：顶栏只放固定栏目，这里放每一个页面 */}
-      <div className="footer-links" aria-label="全部页面">
+      <nav className="footer-links" aria-label="全部页面">
         {indexPages.map((page) => (
           <a
             href={page.href}
@@ -224,14 +270,14 @@ export function SiteFooter({ current }) {
           </span>
           GitHub
         </a>
-      </div>
+      </nav>
 
       <div className="footer-bottom">
         <div className="footer-seal" aria-hidden="true">
           <img src="/logo.jpg" alt="" />
         </div>
         <p>{footer.copyright} · HAND-TENDED WITH REACT + VITE</p>
-        <p>{home.issue} · LAST TENDED 2026.08</p>
+        <p>{home.issue} · {home.issueDate}</p>
       </div>
     </footer>
   )
@@ -241,16 +287,38 @@ export function SiteFooter({ current }) {
 // current 是 src/data/navigation.js 里的页面 id。
 export default function SiteFrame({ current, children }) {
   const [aboutOpen, setAboutOpen] = useState(false)
+  const [paletteOpen, setPaletteOpen] = useState(false)
+
+  // ⌘K / Ctrl+K 随时打开索引；不在输入框里时 "/" 也可以
+  useEffect(() => {
+    const onKey = (event) => {
+      const typing = event.target.closest?.('input, textarea, select, [contenteditable="true"]')
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        setPaletteOpen((open) => !open)
+      } else if (event.key === '/' && !typing) {
+        event.preventDefault()
+        setPaletteOpen(true)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <>
       <a className="skip-link" href="#main-content">
         跳到主要内容
       </a>
-      <SiteHeader current={current} onOpenAbout={() => setAboutOpen(true)} />
+      <SiteHeader
+        current={current}
+        onOpenAbout={() => setAboutOpen(true)}
+        onOpenPalette={() => setPaletteOpen(true)}
+      />
       {children}
       <SiteFooter current={current} />
       {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
+      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
     </>
   )
 }

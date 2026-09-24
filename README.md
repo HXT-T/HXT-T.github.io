@@ -59,11 +59,28 @@ npm run dev    # http://localhost:5173
 
 ### 样式
 
-`src/index.css` 是全站唯一的基础样式：配色变量、排版、顶栏、页头、页脚、关于弹窗。
+`src/index.css` 是全站唯一的基础样式：配色变量、排版、顶栏、页头、页脚、关于弹窗、⌘K 索引。
 各页面的专属样式在同目录的 css 里，只用 `index.css` 里定义的变量，不要再自己定义一套配色。
 
-版式约定：内容满幅铺开，左右留 `clamp(22px, 5vw, 80px)`；分区之间用 1px 细线，
+视觉方向是 **夜樱档案 / Night Bloom**：默认深色（夜墨底 + 樱粉标记），右上角可切到浅色「日间版」。
+
+- 主题由 `<html data-theme="dark|light">` 决定，两套变量都在 `index.css` 顶部；
+  每个入口 html 的 `<head>` 里有一段内联脚本在首屏前设好主题，切换逻辑在 `src/theme.js`。
+- 颜色只用语义变量：`--paper`（底）/ `--paper-deep`（略抬高的面）/ `--ink`（正文）/ `--muted` /
+  `--line` / `--line-strong` / `--rose`（唯一强调色）/ `--blush` + `--plum`（柔粉面 + 其上的文字）。
+- 字体：中文标题与正文用宋体栈 `--font-serif`；英文展示字 `--font-display`（Instrument Serif）；
+  编号、日期、状态用 `--font-mono`（JetBrains Mono）。两款英文字体经 `@fontsource` 自托管，不依赖 Google Fonts。
+- 动效：列表行加 `data-reveal` 即可在滚动进入时淡入（支持 `animation-timeline` 的浏览器才有，其余直接显示）；
+  跨页用 View Transitions 淡入淡出；`prefers-reduced-motion` 下全部关闭。
+
+版式约定：内容满幅铺开，左右留 `var(--gutter)`；分区之间用 1px 细线，
 不用卡片阴影；圆角接近方角；强调色只用 `--rose`。写新页面照抄任意一个现有页面即可。
+
+### ⌘K 索引
+
+任何页面按 `⌘K` / `Ctrl+K` / `/`（或点顶栏的 Index）打开，搜索页面、文章与项目。
+数据直接来自 `navigation.js`、`posts.js`、`projects.js`，新增内容不用另外登记。
+组件在 `src/components/CommandPalette.jsx`。
 
 ### 不要各写一遍的东西
 
@@ -83,7 +100,7 @@ npm run dev    # http://localhost:5173
 
 ### 页面分工
 
-- 首页：个人介绍、重点 MVP、实验摘要、最近文章与生活入口。
+- 首页：封面（自述 + 此刻状态）→ 本期目录 → 最近文章 → 实验室索引 → 此刻 → 生活索引。
 - Product Lab `/projects`：全部作品的目录。
 - MVP 工作台 `/projects?view=mvp`：正在构建的最小可用版本。
 - 已上线、实验、构想、归档：通过 `?view=live|experiments|concepts|archived` 直接访问。
@@ -93,7 +110,7 @@ npm run dev    # http://localhost:5173
 
 在项目数据中设置 `stage: 'mvp'`、`status: 'building'`、`archived: false`。
 填写 `mvpGoal`（核心目标），按实际进展填写 `nextStep` 和 `updatedAt`。
-首页自动展示优先级最高的三个 MVP，工作台展示全部 MVP。
+首页的实验室索引按 `activityRank` 列出所有未归档项目，工作台展示全部 MVP。
 上线后将 `status` 改为 `live`，确认 Demo 可访问后启用 `demoAvailable`。
 项目会自动离开正在构建区，进入已上线视图。
 

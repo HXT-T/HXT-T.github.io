@@ -9,25 +9,30 @@ export const site = {
   githubUrl: 'https://github.com/hxt-t',
 }
 
-// 首页 —— Rose Index / 樱色刊物
+// 首页 —— 夜樱档案 / Night Bloom
 // 这里保存首页专用内容，不影响博客、瞬间、书架与旅行页的数据结构。
 export const home = {
-  issue: 'ISSUE 01',
-  issueDate: 'AUGUST 2026',
-  kicker: 'PERSONAL INTERNET · PRODUCT LAB',
-  wordmark: ['YUYU', 'YUU'],
+  issue: 'ARCHIVE № 02',
+  issueDate: '2026.09',
+  kicker: '夜樱档案 · NIGHT BLOOM',
+  wordmark: 'yuyuyuu',
+  tagline: ['building products,', 'writing in the dark.'],
   manifesto: '我在这里做想存在的东西，也写下它们长成之前的念头。',
-  roles: ['BUILDING PRODUCTS', 'RUNNING EXPERIMENTS', 'WRITING'],
-  location: 'SOMEWHERE ON THE INTERNET · 2026',
+  location: 'SOMEWHERE ON THE INTERNET',
   currentProject: {
     name: 'AI Idol Trainer',
     href: '/projects#ai-idol',
   },
+  reading: '《悉达多》',
+  quote: {
+    text: '有些答案写在文章里，另一些仍散落在书页、代码与路途中。',
+    note: 'notes are allowed to stay unfinished.',
+  },
   cover: {
     src: '/hero-bg.jpg',
     alt: '樱花树下停着一辆白色汽车的春日照片',
-    index: 'ARCHIVE 01',
-    caption: 'BLOOM STUDY · SPRING LIGHT',
+    index: 'PLATE 01',
+    caption: 'BLOOM STUDY · 夜樱',
   },
   now: [
     {
